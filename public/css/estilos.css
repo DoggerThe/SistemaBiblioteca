@@ -1,2 +1,83 @@
+/* --- General --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
 
-/*pito
+/* --- Fondo --- */
+.background {
+    /*background-image: image('/img/biblioteca foto.jpg') no-repeat center center fixed;*/
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* --- Capa encima del fondo --- */
+.overlay {
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+/* --- Título --- */
+h1 {
+    font-size: 2.8em;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+/* --- Logo --- */
+.logo-box {
+    background: white;
+    padding: 40px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-box img {
+    width: 150px;
+    height: auto;
+    border-radius: 70px;
+}
+
+/* --- Botones --- */
+.buttons {
+    display: flex;
+    gap: 40px;
+}
+
+.buttons button {
+    background-color: #C76B4E;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 4px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #a8563d;
+}
