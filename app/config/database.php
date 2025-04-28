@@ -1,22 +1,28 @@
 <?php
-class Database{
-    private $host = 'localhost';
-    private $db_name = 'biblioteca_mvc';
-    private $username = 'root';
-    private $password = 'root';
-    public $conn;
+//require_once 'DatabaseInterface.php';
+require_once 'DatabaseConexion.php';
 
-    public function connect(){
-        $this->conn = null;
-        try{
-            $this -> conn =  new PDO ("mysql:host = {$this->host};dbname={$this->db_name};charset=utf8mb4", $this -> username, $this -> password);
-            $this ->conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "conexion exitante.";
-        }catch (PDOException $exception){
-            echo "error de conexion: ". $exception -> getMessage();
-        }
-        return $this->conn;
-    }
+//configuracion fuera cosa que si entra otra BD se crea asi como esto que acabamos de hacer y no movemos la clase DatabaseConexion.
+$dbConfig = [
+    'host' => 'localhost',
+    'dbname' => 'biblioteca_mvc',
+    'username' => 'root',
+    'password' => 'root'
+];
+
+try {
+    //Se instancia la conexion para ver si conecta,
+    $databaseConexion = new DatabaseConexion(
+        $dbConfig['host'],
+        $dbConfig['dbname'],
+        $dbConfig['username'],
+        $dbConfig['password']
+    );
+    
+    $databaseConexion -> connect();
+    return $databaseConexion; //retorno la instancia con la conexion hecha.
+    
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
 }
-
-//hola
+?>
