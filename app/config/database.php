@@ -1,22 +1,23 @@
 <?php
-class Database{
-    private $host = 'localhost';
-    private $db_name = 'biblioteca_mvc';
-    private $username = 'root';
-    private $password = 'root';
-    public $conn;
+class database {
+    private $host   = 'localhost';
+    private $dbName = 'biblioteca_mvc';
+    private $user   = 'root';
+    private $pass   = 'root'; // o 'root' según tu config
+    private $pdo;
 
-    public function connect(){
-        $this->conn = null;
-        try{
-            $this -> conn =  new PDO ("mysql:host = {$this->host};dbname={$this->db_name};charset=utf8mb4", $this -> username, $this -> password);
-            $this ->conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "conexion exitante.";
-        }catch (PDOException $exception){
-            echo "error de conexion: ". $exception -> getMessage();
+    // Método que devuelve la conexión PDO
+    public function connect() {
+        if ($this->pdo === null) {
+            $dsn = "mysql:host={$this->host};dbname={$this->dbName};charset=utf8mb4";
+            try {
+                $this->pdo = new PDO($dsn, $this->user, $this->pass);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                // Aquí podrías redirigir a un error 500
+                die("Error de conexión a BD.");
+            }
         }
-        return $this->conn;
+        return $this->pdo;
     }
 }
-
-//hola
