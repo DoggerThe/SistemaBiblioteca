@@ -35,7 +35,7 @@ class Usuario {
 
     //reemplazar usuario por cedula
     public function validateUser($usuario, $contrasena) {
-        $sql = "SELECT * FROM usuarios WHERE cedula = :cedula AND password = :password";
+        $sql = "SELECT * FROM usuarios WHERE cedula = :cedula";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':cedula', $usuario); 
         $stmt->execute();
