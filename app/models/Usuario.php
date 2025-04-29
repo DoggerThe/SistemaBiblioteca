@@ -32,4 +32,15 @@ class Usuario {
         return $stmt->fetchColumn() > 0;
         echo $stmt->fetchColumn() > 0;
     }
+
+    //reemplazar usuario por cedula
+    public function validateUser($usuario, $contrasena) {
+        $sql = "SELECT * FROM usuarios WHERE cedula = :cedula AND password = :password";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':cedula', $usuario);
+        $stmt->bindParam(':password', $contrasena); // Ideal: usar password_hash y password_verify
+        $stmt->execute();
+    
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Devuelve el usuario completo
+    }
 }
