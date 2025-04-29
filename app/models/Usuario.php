@@ -37,10 +37,13 @@ class Usuario {
     public function validateUser($usuario, $contrasena) {
         $sql = "SELECT * FROM usuarios WHERE cedula = :cedula AND password = :password";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':cedula', $usuario);
-        $stmt->bindParam(':password', $contrasena); // Ideal: usar password_hash y password_verify
+        $stmt->bindParam(':cedula', $usuario); 
         $stmt->execute();
-    
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Devuelve el usuario completo
+
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC); // Devuelve el usuario completo
+        if ($usuario && password_verify($contrasena, $usuario['password'])) {
+            return $usuario; // Devuelve el usuario completo
+        }
+        return false; // Credenciales incorrectas
     }
 }
