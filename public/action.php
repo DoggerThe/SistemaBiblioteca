@@ -1,7 +1,7 @@
 <?php
 //require_once __DIR__ . '/../app/config/database.php';
 //require_once __DIR__ . '/../app/models/Usuario.php';
-require_once __DIR__ . '/../app/controllers/UserController.php';
+require_once __DIR__ . '/../app/controllers/UsuarioController.php';
 
 // Detectamos qué acción nos pidieron
 $action = $_GET['action'] ?? '';

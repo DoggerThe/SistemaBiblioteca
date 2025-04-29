@@ -15,5 +15,6 @@ function validarContrasenas() {
         alert('Las contraseñas no coinciden. Por favor, verifique e intente de nuevo.');
         return false; // Evita el envío del formulario
     }
+    alert('Las contraseñas coinciden. Por favor, verifique e intente de nuevo.');
     return true; // Permite el envío del formulario
 }

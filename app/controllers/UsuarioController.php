@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../models/Usuario.php';
 
 class UserController {
@@ -11,25 +12,39 @@ class UserController {
 
     public function register(array $post) {
         // 1. Validar que no estén vacíos
-        foreach (['cedula','nombre','apellido','email','password'] as $field) {
+        foreach (['cedula','nombre','apellido','email','direccion','password'] as $field) {
             if (empty($post[$field])) {
-                echo "El campo $field es obligatorio."; return;
+                $_SESSION['error'] = "El campo $field es obligatorio.";
+                header('Location: /SistemaBiblioteca/app/views/usuarios/registerUser.php');
+                exit;
+                //echo "El campo $field es obligatorio."; return;
             }
         }
         // 2. Evitar duplicados
         if ($this->model->existsCedula($post['cedula'])) {
-            echo "La cédula ya existe."; return;
+            //echo "La cédula ya existe."; return;
+            $_SESSION['error'] = "La cédula ya existe.";
+            //guardado de todo para mantenerlo en caso de que exista la cedula.
+            $_SESSION['old'] = [
+                'cedula' => $post['cedula'],
+                'nombre' => $post['nombre'],
+                'apellido' => $post['apellido'],
+                'email' => $post['email'],
+                'direccion' => $post['direccion'],
+            ];
+            header('Location: /SistemaBiblioteca/app/views/usuarios/registerUser.php');
+            exit;
         }
         // 3. Intentar crear
         if ($this->model->create($post)) {
-            echo "Usuario registrado.";
+            $_SESSION['success'] = "Usuario registrado exitosamente.";
+            header('Location: /SistemaBiblioteca/app/views/usuarios/login.php');
+            exit;
         } else {
-            echo "Error al registrar.";
+            $_SESSION['error'] = "Error al registrar.";
+            header('Location: /SistemaBiblioteca/app/views/usuarios/registerUser.php');
+            exit;
+            //echo "Error al registrar.";
         }
     }
-}
-
-// Punto de entrada mínimo
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'register') {
-    (new UserController())->register($_POST);
 }
