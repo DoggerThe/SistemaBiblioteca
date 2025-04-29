@@ -19,7 +19,7 @@ body {
     height: 100%;
 }
 
-/* Columna izquierda con imagen */
+ /*Columna izquierda con imagen */
 .columna-izquierda {
     flex: 1;
     background-color: #f8f1e9;
@@ -34,7 +34,7 @@ body {
     object-position: center;
 }
 
-/* Columna derecha con formulario */
+ /*Columna derecha con formulario */
 .columna-derecha {
     flex: 1;
     display: flex;
@@ -51,7 +51,7 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Contenedor del formulario */
+/*Contenedor del formulario */
 .contenedor-formulario {
     width: 100%;
     max-width: 500px;
