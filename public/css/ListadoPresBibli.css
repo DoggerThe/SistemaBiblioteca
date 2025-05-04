@@ -272,7 +272,7 @@ html, body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     overflow-y: auto;     
     overflow-x: auto;
-    max-height: 320px;  
+    height: 320px;  
     margin-bottom: 1em; /* 👈 Espacio hacia abajo */
 }
 
@@ -285,7 +285,7 @@ html, body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     overflow-x: auto;
-    max-height: 320px;
+    height: 320px;
     margin-top: 1em; /* 👈 Espacio hacia arriba */
 }
 

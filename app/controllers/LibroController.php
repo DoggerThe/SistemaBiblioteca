@@ -9,13 +9,14 @@ class LibroController {
     }
 
     // Buscar libros por título o autor (se usa desde action.php con AJAX)
-    public function buscar(array $post) {
+    public function buscar_libro(array $post) {
+        header('Content-Type: application/json');
         if (empty($post['termino'])) {
             echo json_encode([]); // Devuelve un array vacío si no se envió término
             return;
         }
 
-        $resultado = $this->model->buscarPorTituloOAutor($post['termino']);
+        $resultado = $this->model->buscarLibros($post['termino']);
         echo json_encode($resultado); // Responde con los libros en formato JSON
     }
 }

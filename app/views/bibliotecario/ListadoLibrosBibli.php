@@ -11,12 +11,10 @@ requireRole(2); // 2 es el rol de bibliotecario
     <link rel="stylesheet" href="/SistemaBiblioteca/public/css/ListadoLibroBiblio.css">
 </head>
 <body>
-    
     <div class="bibliotecario-container">
         
         <header class="header">
             <h1 class="welcome">Bienvenido Bibliotecario</h1>
-
             <div class="button-group">
             <button class="logout-btn" onclick="location.href='/logout'">CERRAR SESION</button>
             <button class="image-button" onclick="location.href='/logout'">
@@ -24,10 +22,8 @@ requireRole(2); // 2 es el rol de bibliotecario
             </button>
         </div>
         </header>
-
         
         <div class="separator"></div>
-
         
         <aside class="sidebar">
             <div class="menu-list">
@@ -39,7 +35,7 @@ requireRole(2); // 2 es el rol de bibliotecario
         
         <div class="container-General"> 
             <div class="Container-barra">
-            <form class="barra-busqueda" onsubmit="buscar(event)">
+              <form class="barra-busqueda" onsubmit="buscar(event)">
                 <input type="text" id="busqueda" placeholder="Buscar...">
                 <button type="submit">🔍</button>
               </form>
@@ -55,21 +51,12 @@ requireRole(2); // 2 es el rol de bibliotecario
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            <td>Cien Años de Soledad</td>
-                            <td>Gabriel García Márquez</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>Don Quijote de la Mancha</td>
-                            <td>Miguel de Cervantes</td>
-                            <td>2</td>
-                        </tr>
+<!--Aqui se llena de datos de la BD-->
                       </tbody>
                     </table>
                 </div>
         </div>
     </div>
-    <script src="../js/Registro.js"></script>
+    <script src="/SistemaBiblioteca/public/js/busquedaLibros.js"></script>
 </body>
 </html>

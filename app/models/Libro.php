@@ -9,17 +9,17 @@ class Libro {
     }
 
     // Buscar libros por título o autor
-    public function buscarPorTituloOAutor(string $termino): array {
-        $sql = "SELECT * FROM libros 
-                WHERE titulo LIKE :termino OR autor LIKE :termino";
+    public function buscarLibros(string $termino): array {
+        $sql = "SELECT titulo, autor, cantidad FROM libros 
+                WHERE titulo LIKE :termino OR autor LIKE :termino OR genero LIKE :termino";
+        
         $stmt = $this->db->prepare($sql);
-        $termino = "%$termino%";
-        $stmt->bindParam(':termino', $termino, PDO::PARAM_STR);
+        $likeTermino = '%' . $termino . '%';
+        $stmt->bindValue(':termino', $likeTermino);
         $stmt->execute();
-
+    
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     // Otros métodos que podrías querer implementar más adelante:
     // - public function obtenerTodos(): array {}
     // - public function crear(array $datos): bool {}
