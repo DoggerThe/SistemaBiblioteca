@@ -29,26 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'buscar_inactivos':
             (new PrestamoController())->buscarInactivos($_POST);
             break;
-/*
-case 'listar_libros':
-    $libroController->listarTodos();
-    break;
-
-case 'listar_libros_activos':
-    $libroController->listarActivos();
-    break;
-
-case 'listar_libros_inactivos':
-    $libroController->listarInactivos();
-    break;
-
-case 'listar_libros_disponibles':
-    $libroController->listarDisponibles();
-    break;
-*/
-
         default:
             echo "Acción no reconocida.";
+            break;
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    switch ($action) {
+        case 'listarSolicitudesPendientes':
+            (new PrestamoController())->listarPendientes();
             break;
     }
 } else {

@@ -42,20 +42,24 @@ requireRole(2); // 2 es el rol de bibliotecario
                 <table id="tablaLibros">
                     <thead>
                         <tr>
+                            <th>Id Prestamo</th>
                             <th>Usuario</th>
                             <th>Libro</th>
                             <th>Fecha de Solicitud</th>
                             <th>Fecha de Inicio</th>
+                            <th>Fecha de Fin</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                      <tbody>
                         <tr>
+                            <td>1</td>
                             <td>0645821369</td>
                             <td>Introducción a la Programación</td>
                             <td>2024-04-17</td>
-                            <td>---------</td>
+                            <td>2024-04-18</td>
+                            <td>2024-05-18</td>
                             <td>Pendiente</td>
                             <td class="acciones">
                                 <button onclick="Confirmar(this)" title="Confirmar" class="btn-confirmar">
@@ -63,11 +67,22 @@ requireRole(2); // 2 es el rol de bibliotecario
                                 </button>
                             </td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </div>
     </div>
-    <script src="../js/Registro.js"></script>
+    <!--No Check-->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Detalles del Préstamo</h2>
+            <p><strong>Libro:</strong> <span id="modalLibro"></span></p>
+            <p><strong>Fecha de Solicitud:</strong> <span id="modalFechaSolicitud"></span></p>
+            <p><strong>Fecha de Inicio:</strong> <span id="modalFechaInicio"></span></p>
+            <p><strong>Fecha de Fin:</strong> <span id="modalFechaFin"></span></p>
+            <button onclick="cambiarEstado()">Cambiar a Activo</button>
+        </div>
+    </div>
+    <script src="/SistemaBiblioteca/public/js/listarSolicitudes.js"></script>
 </body>
 </html>
