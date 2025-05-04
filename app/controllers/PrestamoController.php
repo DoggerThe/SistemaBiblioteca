@@ -24,4 +24,10 @@ class PrestamoController {
         $resultados = $this->model->listarSolicitudesPendientes();
         echo json_encode($resultados);
     }
+
+
+    public function aceptarPrestamo($id) {
+        $resultado = $this->model->aceptarPrestamo($id);
+        echo json_encode($resultado);
+    }
 }

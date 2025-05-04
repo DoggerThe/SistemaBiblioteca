@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'buscar_inactivos':
             (new PrestamoController())->buscarInactivos($_POST);
             break;
+        case 'aceptarPrestamo':
+            (new PrestamoController())->aceptarPrestamo($_POST['id']);
+            break;
         default:
             echo "Acción no reconocida.";
             break;

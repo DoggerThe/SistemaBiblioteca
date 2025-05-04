@@ -72,7 +72,7 @@ requireRole(2); // 2 es el rol de bibliotecario
             </div>
     </div>
     <!--No Check-->
-    <div id="modal" class="modal">
+    <div id="modal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close" onclick="cerrarModal()">&times;</span>
             <h2>Detalles del Préstamo</h2>
@@ -80,7 +80,7 @@ requireRole(2); // 2 es el rol de bibliotecario
             <p><strong>Fecha de Solicitud:</strong> <span id="modalFechaSolicitud"></span></p>
             <p><strong>Fecha de Inicio:</strong> <span id="modalFechaInicio"></span></p>
             <p><strong>Fecha de Fin:</strong> <span id="modalFechaFin"></span></p>
-            <button onclick="cambiarEstado()">Cambiar a Activo</button>
+            <button onclick="cambiarEstado()">Confirmar Solicitud</button>
         </div>
     </div>
     <script src="/SistemaBiblioteca/public/js/listarSolicitudes.js"></script>

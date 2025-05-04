@@ -33,6 +33,54 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 });
+/*amor a la patria*/
+
+function Confirmar(btn) {
+    const fila = btn.closest("tr");
+    const celdas = fila.children;
+
+    prestamoSeleccionado = {
+        id: celdas[0].textContent.trim(),
+        libro: celdas[2].textContent.trim()
+    };
+
+    // Mostrar datos en el modal
+    document.getElementById("modalLibro").textContent = celdas[2].textContent;
+    document.getElementById("modalFechaSolicitud").textContent = celdas[3].textContent;
+    document.getElementById("modalFechaInicio").textContent = celdas[4].textContent;
+    document.getElementById("modalFechaFin").textContent = celdas[5].textContent;
+
+    document.getElementById("modal").style.display = "block";
+}
+
+function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+// Acción que llama al backend
+function cambiarEstado() {
+    fetch('/SistemaBiblioteca/public/action.php?action=aceptarPrestamo', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "id=" + prestamoSeleccionado.id
+    })
+    .then(res => res.json())
+    .then(respuesta => {
+        if (respuesta.success) {
+            alert("Solicitud confirmada.");
+            cerrarModal();
+            location.reload(); // Refrescar tabla
+        } else {
+            alert(respuesta.mensaje || "Error al confirmar el préstamo.");
+        }
+    })
+    .catch(error => {
+        console.log("Hola1: " + error);
+    });
+}
+
 
 /*
 let prestamoSeleccionado = null;

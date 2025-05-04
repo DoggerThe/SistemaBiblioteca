@@ -59,4 +59,40 @@ class Prestamo {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //a
+
+    public function aceptarPrestamo($idPrestamo) {
+        $conn = $this->db;
+    
+        // Paso 1: Obtener libro_id asociado al préstamo
+        $stmt = $conn->prepare("SELECT libro_id FROM prestamos WHERE id = ?");
+        $stmt->execute([$idPrestamo]);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$resultado) {
+            return ['success' => false, 'mensaje' => 'Préstamo no encontrado.'];
+        }
+    
+        $libro_id = $resultado['libro_id'];
+    
+        // Paso 2: Verificar si hay ejemplares disponibles
+        $stmt = $conn->prepare("SELECT cantidad FROM libros WHERE id = ?");
+        $stmt->execute([$libro_id]);
+        $libro = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$libro || $libro['cantidad'] <= 0) {
+            return ['success' => false, 'mensaje' => 'No hay ejemplares disponibles del libro.'];
+        }
+    
+        // Paso 3: Actualizar estado del préstamo a ACTIVO (1)
+        $stmt = $conn->prepare("UPDATE prestamos SET estado_id = 1 WHERE id = ?");
+        $stmt->execute([$idPrestamo]);
+    
+        // Paso 4: Disminuir en 1 la cantidad del libro
+        $stmt = $conn->prepare("UPDATE libros SET cantidad = cantidad - 1 WHERE id = ?");
+        $stmt->execute([$libro_id]);
+    
+        return ['success' => true];
+    }
 }
