@@ -15,12 +15,12 @@ requireRole(2); // 2 es el rol de bibliotecario
     <div class="bibliotecario-container">
         
         <header class="header">
-            <h1 class="welcome">Bienvenido Bibliotecario</h1>
+            <h1 class="welcome"><a href="InicioBibliotec.php">Bienvenido Bibliotecario</a></h1>
 
             <div class="button-group">
             <button class="logout-btn" onclick="location.href='/logout'">CERRAR SESION</button>
             <button class="image-button" onclick="location.href='/logout'">
-            <img src="/public/img/user.png" alt="Login">
+            <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
             </button>
         </div>
         </header>
@@ -30,8 +30,8 @@ requireRole(2); // 2 es el rol de bibliotecario
         <aside class="sidebar">
             <div class="menu-list">
                 <button class="menu-button" onclick="location.href='ListadoLibrosBibli.php'">Libros</button>
-                <button class="menu-button" onclick="location.href='ListadoPrestBibli.php'">Solicitudes de Préstamos</button>
-                <button class="menu-button" onclick="location.href='SolicPrestBibli.php'">Listado de Préstamos</button>
+                <button class="menu-button" onclick="location.href='SolicPrestBibli.php'">Solicitudes de Préstamos</button>
+                <button class="menu-button" onclick="location.href='ListadoPrestBibli.php'">Listado de Préstamos</button>
             </div>
         </aside>
         
