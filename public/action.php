@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../app/controllers/UsuarioController.php';
 require_once __DIR__ . '/../app/controllers/IniSesion.php';
 require_once __DIR__ . '/../app/controllers/LibroController.php';
-
+require_once __DIR__ . '/../app/controllers/PrestamoController.php';
 // Detectamos qué acción nos pidieron
 //$action = $_GET['action'] ?? '';
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'buscar':
             (new LibroController())->buscar_libro($_POST);
+            break;
+        case 'buscar_activos':
+            (new PrestamoController())->buscarActivos($_POST);
+            break;
+        case 'buscar_inactivos':
+            (new PrestamoController())->buscarInactivos($_POST);
             break;
 /*
 case 'listar_libros':
