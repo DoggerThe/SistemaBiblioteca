@@ -10,7 +10,6 @@ require_once __DIR__ . '/../app/controllers/PrestamoController.php';
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 //$libroController = new LibroController(); // Instancia del controlador de libros
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         case 'register':
@@ -35,6 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'solicitarLibro':
             (new PrestamoController())->crearSolicitud($_POST);
             break;
+        case 'listarLibrosPrestaUsu':
+            $input = json_decode(file_get_contents("php://input"), true);
+            $_POST = array_merge($_POST, $input);
+            (new PrestamoController())->listarLibrosUsuario($_POST['usuario_id']);
+            break;
         default:
             echo "Acción no reconocida.";
             break;
@@ -47,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'listarLibrosDisponibles':
             (new LibroController())->listarLibrosDisponibles();
             break;
+
+
     }
 } else {
     echo "Acceso inválido.";

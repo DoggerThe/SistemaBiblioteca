@@ -104,4 +104,17 @@ class Prestamo {
         $stmt = $conn->prepare($sql);
         return $stmt->execute([$id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin]);
     }
+
+    public function listarLibrosPrestados($usuario_id) {
+        $conn = $this->db;
+        $stmt = $conn->prepare("
+            SELECT p.id AS id_prestamo, l.titulo AS titulo_libro, p.libro_id, p.fecha_solicitud, p.fecha_inicio, p.fecha_fin
+            FROM prestamos p
+            JOIN libros l ON p.libro_id = l.id
+            WHERE p.usuario_id = ? AND p.estado_id = 1
+            ORDER BY p.fecha_inicio DESC
+        ");
+        $stmt->execute([$usuario_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

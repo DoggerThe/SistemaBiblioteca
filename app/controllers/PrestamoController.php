@@ -47,4 +47,9 @@ class PrestamoController {
     
         echo json_encode(['success' => $resultado]);
     }
+
+    public function listarLibrosUsuario($usuario_id) {
+        $resultados = $this->model->listarLibrosPrestados($usuario_id);
+        echo json_encode($resultados);
+    }
 }

@@ -3,7 +3,7 @@ class database {
     private $host   = 'localhost';
     private $dbName = 'biblioteca_mvc';
     private $user   = 'root';
-    private $pass   = 'root'; // o 'root' según tu config
+    private $pass   = 'root';
     private $pdo;
 
     // Método que devuelve la conexión PDO

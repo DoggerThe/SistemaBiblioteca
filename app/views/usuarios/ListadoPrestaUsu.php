@@ -33,7 +33,6 @@ requireRole(1); // 1 es el rol de usuario normal
                 <button class="menu-button" onclick="location.href='ListadoPrestaUsu.php'">Prestamos</button>
             </div>
         </aside>
-        
         <div class="container-General"> 
             <div class="Container-Tabla">
                 <h1>Lista de libros</h1>
@@ -42,9 +41,8 @@ requireRole(1); // 1 es el rol de usuario normal
                         <tr>
                             <th>Id Libro</th>
                             <th>Libro</th>
-                            <th>Autor</th>
-                            <th>Genero</th>
-                            <th>Cantidad</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de fin</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -54,29 +52,21 @@ requireRole(1); // 1 es el rol de usuario normal
                 </table>
             </div>
     </div>
-    <!--No Check-->
+    <!--Cambiar-->
     <div id="modal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close" onclick="cerrarModal()">&times;</span>
             <h2>Detalles del Préstamo</h2>
-            <p><strong>ID:</strong> <span id="modalId"></span></p>
             <p><strong>Libro:</strong> <span id="modalLibro"></span></p>
-            <p><strong>Autor:</strong> <span id="modalAutor"></span></p>
-            <p><strong>Genero:</strong> <span id="modalGenero"></span></p>
-            <p><label>Fecha de Inicio:
-            <input type="date" id="fechaInicio">
-            </label></p>
-            
-            <p><label>Fecha de Fin:
-                <input type="date" id="fechaFin">
-            </label></p>
-            
-            <button onclick="confirmarSolicitud()">Confirmar Solicitud</button>
+            <p><strong>Fecha de Solicitud:</strong> <span id="modalFechaSolicitud"></span></p>
+            <p><strong>Fecha de Inicio:</strong> <span id="modalFechaInicio"></span></p>
+            <p><strong>Fecha de Fin:</strong> <span id="modalFechaFin"></span></p>
+            <button onclick="cerrarModal()">Confirmar</button>
         </div>
     </div>
     <script>
         const idUsuario = <?php echo $_SESSION['usuario']['id']; ?>;
     </script>
-    <script src="/SistemaBiblioteca/public/js/listarLibUsu.js"></script>
+    <script src="/SistemaBiblioteca/public/js/ListadoPrestaUsu.js"></script>
 </body>
 </html>
