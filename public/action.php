@@ -32,6 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'aceptarPrestamo':
             (new PrestamoController())->aceptarPrestamo($_POST['id']);
             break;
+        case 'solicitarLibro':
+            (new PrestamoController())->crearSolicitud($_POST);
+            break;
         default:
             echo "Acción no reconocida.";
             break;
@@ -40,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         case 'listarSolicitudesPendientes':
             (new PrestamoController())->listarPendientes();
+            break;
+        case 'listarLibrosDisponibles':
+            (new LibroController())->listarLibrosDisponibles();
             break;
     }
 } else {

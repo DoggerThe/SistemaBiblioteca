@@ -95,4 +95,13 @@ class Prestamo {
     
         return ['success' => true];
     }
+
+    public function crearSolicitud($id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin) {
+        $conn = $this->db;
+    
+        $sql = "INSERT INTO prestamos (libro_id, usuario_id, fecha_solicitud, fecha_inicio, fecha_fin, estado_id) 
+                VALUES (?, ?, ?, ?, ?, 3)";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute([$id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin]);
+    }
 }

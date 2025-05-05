@@ -19,4 +19,8 @@ class LibroController {
         $resultado = $this->model->buscarLibros($post['termino']);
         echo json_encode($resultado); // Responde con los libros en formato JSON
     }
+    public function listarLibrosDisponibles() {
+        $resultados = $this->model->listarLibrosDisponibles();
+        echo json_encode($resultados); // Responde con los libros en formato JSON
+    }
 }

@@ -20,6 +20,17 @@ class Libro {
     
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function listarLibrosDisponibles(){
+        $conn = $this->db;
+        $stmt = $conn->prepare("
+            SELECT l.id, l.titulo, l.autor, l.genero, l.cantidad
+            FROM libros l
+            WHERE l.cantidad > 0
+            ORDER BY l.titulo ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Otros métodos que podrías querer implementar más adelante:
     // - public function obtenerTodos(): array {}
     // - public function crear(array $datos): bool {}

@@ -30,4 +30,21 @@ class PrestamoController {
         $resultado = $this->model->aceptarPrestamo($id);
         echo json_encode($resultado);
     }
+
+    public function crearSolicitud(array $post) {
+        $id_libro = $post['id_libro'] ?? null;
+        $id_usuario = $post['id_usuario'] ?? null;
+        $fecha_solicitud = $post['fecha_solicitud'] ?? null;
+        $fecha_inicio = $post['fecha_inicio'] ?? null;
+        $fecha_fin = $post['fecha_fin'] ?? null;
+    
+        if (!$id_libro || !$id_usuario || !$fecha_solicitud || !$fecha_inicio || !$fecha_fin) {
+            echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+            return;
+        }
+    
+        $resultado = $this->model->crearSolicitud($id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin);
+    
+        echo json_encode(['success' => $resultado]);
+    }
 }
