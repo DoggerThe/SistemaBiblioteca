@@ -38,6 +38,6 @@
             </div>
         </div>
     </div>
-    <script src="/public/js/ValidaContra.js"></script>
+    <script src="/SistemaBiblioteca/public/js/ValidaContra.js"></script>
 </body>
 </html>

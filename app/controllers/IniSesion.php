@@ -33,4 +33,12 @@ class LoginController {
             echo "Credenciales incorrectas.";
         }
     }
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header('Location: /SistemaBiblioteca/public/index.php');
+        exit;
+    }
 }

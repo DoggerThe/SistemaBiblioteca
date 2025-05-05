@@ -54,8 +54,9 @@ body {
 /*Contenedor del formulario */
 .contenedor-formulario {
     width: 54%;
-    height: 80%;
-    /*max-width: 500px;*/
+    /*
+    height: 80%;*/
+    max-width: 350px;
     background-color: #a3a1a1;
     padding: 2rem;
     border-radius: 8px;
@@ -69,9 +70,11 @@ h1 {
     font-size: 2rem;
 }
 
+/*
 .grupo-formulario {
     margin-bottom: 1.5rem;
 }
+*/
 
 label {
     display: block;
@@ -83,11 +86,11 @@ label {
 
 input {
     width: 100%;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     transition: border-color 0.3s;
 }
 

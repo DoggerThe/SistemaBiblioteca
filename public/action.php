@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'register':
             (new UserController())->register($_POST);// este esta en UsuarioController
             break;
-
         case 'login':
             (new LoginController())->login($_POST); // este esta en IniSesion
             break;
@@ -50,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'listarLibrosDisponibles':
             (new LibroController())->listarLibrosDisponibles();
+            break;
+        case 'logout':
+            (new LoginController())->logout(); // Crearás este método
             break;
 
 

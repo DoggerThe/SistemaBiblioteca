@@ -17,7 +17,7 @@ requireRole(2); // 2 es el rol de bibliotecario
             <h1 class="welcome"><a href="InicioBibliotec.php">Bienvenido Bibliotecario</a></h1>
 
             <div class="button-group">
-            <button class="logout-btn" onclick="location.href='/logout'">CERRAR SESION</button>
+            <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
             <button class="image-button" onclick="location.href='/logout'">
             <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
             </button>
