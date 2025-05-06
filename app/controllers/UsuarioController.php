@@ -47,4 +47,33 @@ class UserController {
             //echo "Error al registrar.";
         }
     }
+
+    public function verPerfil($usuario_id) {
+        $usuario = $this->model->obtenerUsuarioPorId($usuario_id);
+        if ($usuario) {
+            echo json_encode($usuario);
+        } else {
+            echo json_encode(['error' => 'Usuario no encontrado.']);
+        }
+    }
+    
+    public function cambiarPassword($data) {
+        // Validar contraseña actual directamente en el modelo
+        $verificada = $this->model->verificarPasswordActual($data['usuario_id'], $data['antigua']);
+    
+        if (!$verificada) {
+            echo json_encode(['success' => false, 'message' => 'Contraseña actual incorrecta.']);
+            return;
+        }
+    
+        // Si está verificada, procede al cambio
+        $nuevaHash = password_hash($data['nueva'], PASSWORD_BCRYPT);
+        $result = $this->model->actualizarPassword($data['usuario_id'], $nuevaHash);
+    
+        if ($result) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Error al actualizar la contraseña.']);
+        }
+    }
 }

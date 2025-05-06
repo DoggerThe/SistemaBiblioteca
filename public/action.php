@@ -38,6 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST = array_merge($_POST, $input);
             (new PrestamoController())->listarLibrosUsuario($_POST['usuario_id']);
             break;
+        case 'verPerfilUsuario':
+            $input = json_decode(file_get_contents("php://input"), true);
+            $_POST = array_merge($_POST, $input);
+            (new UserController())->verPerfil($_POST['usuario_id']);
+            break;
+        case 'cambiarPassword':
+            $input = json_decode(file_get_contents("php://input"), true);
+            $_POST = array_merge($_POST, $input);
+            (new UserController())->cambiarPassword($_POST);
+            break;
         default:
             echo "Acción no reconocida.";
             break;

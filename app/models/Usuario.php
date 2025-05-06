@@ -46,4 +46,52 @@ class Usuario {
         }
         return false; // Credenciales incorrectas
     }
+
+    public function obtenerUsuarioPorId($id) {
+        $sql = "SELECT nombre, apellido, cedula, email, direccion FROM usuarios WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function verificarPassword($id, $passwordPlano) {
+        $sql = "SELECT password FROM usuarios WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($usuario && password_verify($passwordPlano, $usuario['password'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function verificarPasswordActual($usuario_id, $passwordIngresada) {
+        $sql = "SELECT password FROM usuarios WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $usuario_id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($usuario && password_verify($passwordIngresada, $usuario['password'])) {
+            return true;
+        }
+    
+        return false;
+    }
+
+    public function actualizarPassword($id, $nuevaHash) {
+        $sql = "UPDATE usuarios SET password = :password WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':password', $nuevaHash);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    
 }
