@@ -1,0 +1,316 @@
+/* Variables CSS para consistencia */
+:root {
+    --base-font: 16px;
+    --spacing-unit: 1rem;
+    --color-primary: #4F3622;
+    --color-secondary: #8b5e3c;
+    --color-secondary-dark: #c0392b;
+    --color-maincontent: #D9CFC1;
+    --color-titulos-negritos: #000000;
+    --color-bg: #e7dfd5;
+    --color-white: #f8f5f2;
+    --color-sidebar: #AE9C82;
+    --color-border: #c2b6a9;
+    --color-hover: #a97142;
+    --shadow-light: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+    --color-boton-logout: #dc3545;
+  }
+  
+
+  body {
+    font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-bg);
+      color: #333;
+      font-size: var(--base-font);
+  }
+  
+  .bibliotecario-container {
+      display: grid;
+      grid-template-areas:
+          "header header"
+          "separator separator"
+          "sidebar content";
+      grid-template-columns: minmax(12.5rem, 15.625rem) 1fr; /* 200-250px */
+      min-height: 100vh;
+      grid-template-rows: auto 0.125rem 1fr;
+  }
+  
+  /* Header responsive */
+  .header {
+      grid-area: header;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5vw; /* Unidades relativas */
+      background-color: var(--color-primary);
+      box-shadow: var(--shadow-light);
+      margin: 0;
+  }
+  
+  .welcome {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive */
+      color: var(--color-white);
+      padding-left: 12rem;
+      font-family: 'Poppins', sans-serif;
+  }
+  .welcome a {
+      text-decoration: none;
+      color: var(--color-white);
+  }
+  
+  .logout-btn {
+    padding: 0.5rem 1.3rem;
+    background-color: var(--color-boton-logout);
+    color: var(--color-white);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-light);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .logout-btn:hover {
+      background-color: var(--color-secondary-dark);
+  }
+  
+  .separator {
+      grid-area: separator;
+      height: 0.125rem;
+      background-color: var(--color-primary);
+      margin: 0;
+      padding: 0;
+  }
+  
+  /* Recuerda Sidebar responsive va aqui*/
+  .sidebar {
+      grid-area: sidebar;
+      padding: 1.25rem;
+      background-color: var(--color-sidebar);
+      border-right: 1px solid var(--color-border);
+  }
+  
+ 
+  
+  .menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .menu-item {
+    padding: 1rem 0.9375rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  .menu-item:hover {
+    background-color: #d7c7b7;
+    color: var(--color-hover);
+}
+  
+
+
+
+  
+  /* Media Queries para mejor adaptación */
+  @media (max-width: 768px) {
+      .bibliotecario-container {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+              "header"
+              "separator"
+              "content";
+      }
+      
+      .sidebar {
+          display: none; /* Ocultar sidebar en móviles */
+      }
+      
+      .header {
+          padding: 1rem 5%;
+      }
+      
+  }
+  
+  @media (max-width: 2080px) {
+      .welcome-library {
+        display: block;
+        margin: 0.25rem auto 0;
+        max-width: 1100px; /* Aumenté el tamaño máximo */
+        width: 300rem; /* Asegura que ocupe el ancho disponible */
+        height: auto;
+        object-fit: contain;
+        border-radius: 1rem;
+        
+          
+      }
+      
+      .logout-btn {
+          padding: 0.5rem;
+          font-size: 0.75rem;
+      }
+  }
+  .image-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.image-button img {
+    width: 32px; /* Ajusta el tamaño según quieras */
+    height: auto;
+    border-radius: 1rem; /* Bordes redondeados, opcional */
+}
+
+.image-button:hover img {
+    transform: scale(1.1);
+}
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Espacio pequeño entre los botones */
+    margin-right: 2rem; /* Empuja el grupo un poco a la izquierda */
+}
+
+@media (max-width: 768px) {
+    .button-group {
+        margin-right: 0; /* En móviles, elimina margen para que no se vea mal */
+    }
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-button {
+    padding: 1rem;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    color: var(--color-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-button:hover {
+    background-color: #d7c7b7;
+    color: var(--color-hover);
+}
+/* Mio */
+  
+.container-General {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+
+  }
+.Container-Tabla{
+    background-color: #fff;
+    padding: 0em 2em 2em;
+    border-radius: 10px;
+    max-width: 1500px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    height: 700px; 
+    width: fit-content;       /* Se ajusta al contenido (por ejemplo, a una tabla) */
+    overflow: auto;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #141313;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+}
+
+td {
+    background-color: var(--color-maincontent);
+    font-size: 0.95rem;
+}
+
+tr:hover {
+    background-color: var(--color-secondary);
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+thead {
+    margin: 0;
+    padding: 0;
+}
+
+/* modal */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  .close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  button {
+    padding: 8px 16px;
+    background-color: #3a9b51be;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #2a853f;
+  }
