@@ -18,22 +18,44 @@
             <img src="/SistemaBiblioteca/public/img/Logobiblioteca.png" alt="Logo Biblioteca" class="logo">
             <div class="contenedor-formulario">
                 <h1>Biblioteca</h1>
-                <form action="/SistemaBiblioteca/public/action.php?action=login" method="POST" onsubmit="return validarContrasenas()">
+
+                
+                <form id="loginForm">
                     <div class="grupo-formulario">
-                        <!--aqui hay que modificar al usuario ya que mejor es cedula que no se repite.-->
-                        <label for="usuario">Cedula</label>
-                        <input type="text" id="usuario" name="usuario"placeholder="Cedula" required>
+                        <label for="usuario">Cédula</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Cédula" required>
                     </div>
-                    
+
                     <div class="grupo-formulario">
-                        <label for="contrasena">CONTRASEÑA</label>
+                        <label for="contrasena">Contraseña</label>
                         <div class="contrasena-container">
                             <input type="password" id="contrasena" name="contrasena" placeholder="***********" required>
                             <input type="checkbox" onclick="mostrarContrasena('contrasena')">
                         </div>
                     </div>                             
-                    <button type="submit" class="boton-registro">Iniciar Sesion</button>
+                    <button type="submit" class="boton-registro">Iniciar Sesión</button>
                 </form>
+
+                <div id="mensaje-error" style="color: red; margin-top: 10px;"></div>
+
+                    <!--
+                        <form action="/SistemaBiblioteca/public/action.php?action=login" method="POST" onsubmit="return validarContrasenas()">
+                            <div class="grupo-formulario">
+                                
+                                <label for="usuario">Cedula</label>
+                                <input type="text" id="usuario" name="usuario"placeholder="Cedula" required>
+                            </div>
+                            
+                            <div class="grupo-formulario">
+                                <label for="contrasena">CONTRASEÑA</label>
+                                <div class="contrasena-container">
+                                    <input type="password" id="contrasena" name="contrasena" placeholder="***********" required>
+                                    <input type="checkbox" onclick="mostrarContrasena('contrasena')">
+                                </div>
+                            </div>                             
+                            <button type="submit" class="boton-registro">Iniciar Sesion</button>
+                        </form>
+                    -->
                 <p class="texto-inicio-sesion">¿No tienes cuenta? <a href="/SistemaBiblioteca/app/views/usuarios/registerUser.php">REGISTRARME</a></p>
             </div>
         </div>

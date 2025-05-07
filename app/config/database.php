@@ -1,9 +1,10 @@
 <?php
+//Clase para la conexión a la base de datos
 class database {
     private $host   = 'localhost';
-    private $dbName = 'biblioteca_mvc';
-    private $user   = 'root';
-    private $pass   = 'root';
+    private $dbName = 'biblioteca_mvc'; //Nombre de la base de datos
+    private $user   = 'root'; //Usuario de la base de datos
+    private $pass   = 'root'; //Depende de que se pusiera en la BD al crearla
     private $pdo;
 
     // Método que devuelve la conexión PDO
@@ -14,8 +15,12 @@ class database {
                 $this->pdo = new PDO($dsn, $this->user, $this->pass);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                // Aquí podrías redirigir a un error 500
-                die("Error de conexión a BD.");
+                // Aquí se pone un mensaje de error al usuario en caso de entrar.
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Error de conexión a la base de datos intentelo mas tarde.'
+                ]);
+                exit;
             }
         }
         return $this->pdo;

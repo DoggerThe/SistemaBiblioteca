@@ -8,31 +8,66 @@ class LoginController {
         $this->model = new Usuario();
     }
 
-    public function login(array $post) {
-        if (empty($post['usuario']) || empty($post['contrasena'])) {
-            echo "Usuario y contraseña requeridos.";
-            return;
-        }
+    /*
+Voy a tratar de hacer el otro:
 
-        $usuario = $this->model->validateUser($post['usuario'], $post['contrasena']);
-
-        if ($usuario) {
-            session_start();
-            $_SESSION['usuario'] = $usuario;
-
-            // Redirección según el rol_id
-            if ($usuario['rol_id'] == 1) {
-                header('Location: /SistemaBiblioteca/app/views/usuarios/InicioUser.php');
-            } elseif ($usuario['rol_id'] == 2) {
-                header('Location: /SistemaBiblioteca/app/views/bibliotecario/InicioBibliotec.php');
-            } else {
-                echo "Rol no reconocido.";
-            }
-            exit;
-        } else {
-            echo "Credenciales incorrectas.";
-        }
+public function login(array $post) {
+    if (empty($post['usuario']) || empty($post['contrasena'])) {
+        echo "Usuario y contraseña requeridos.";
+        return;
     }
+
+    $usuario = $this->model->validateUser($post['usuario'], $post['contrasena']);
+
+    if ($usuario) {
+        session_start();
+        $_SESSION['usuario'] = $usuario;
+
+        // Redirección según el rol_id
+        if ($usuario['rol_id'] == 1) {
+            header('Location: /SistemaBiblioteca/app/views/usuarios/InicioUser.php');
+        } elseif ($usuario['rol_id'] == 2) {
+            header('Location: /SistemaBiblioteca/app/views/bibliotecario/InicioBibliotec.php');
+        } else {
+            echo "Rol no reconocido.";
+        }
+        exit;
+    } else {
+        echo "Credenciales incorrectas.";
+    }
+}
+*/
+public function login(array $post) {
+    header('Content-Type: application/json');
+
+    if (empty($post['usuario']) || empty($post['contrasena'])) {
+        echo json_encode(['success' => false, 'message' => 'Usuario y contraseña requeridos.']);
+        return;
+    }
+
+    $usuario = $this->model->validateUser($post['usuario'], $post['contrasena']);
+
+    if ($usuario) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION['usuario'] = $usuario;
+
+        if ($usuario['rol_id'] == 1) {
+            echo json_encode(['success' => true, 'redirect' => '/SistemaBiblioteca/app/views/usuarios/InicioUser.php']);
+        } elseif ($usuario['rol_id'] == 2) {
+            echo json_encode(['success' => true, 'redirect' => '/SistemaBiblioteca/app/views/bibliotecario/InicioBibliotec.php']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Rol no reconocido.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Credenciales incorrectas.']);
+    }
+}
+
+
+
     public function logout() {
         session_start();
         session_unset();
