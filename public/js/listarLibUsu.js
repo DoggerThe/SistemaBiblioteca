@@ -1,13 +1,15 @@
+// Evento que se ejecuta cuando el DOM ha sido completamente cargado.
+// Solicita al backend la lista de libros disponibles y los muestra en la tabla.
 document.addEventListener("DOMContentLoaded", function () {
     fetch('/SistemaBiblioteca/public/action.php?action=listarLibrosDisponibles')
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector("#tablaLibros tbody");
-            tbody.innerHTML = "";
+            tbody.innerHTML = "";// Limpia la tabla antes de agregar nuevos datos
 
             data.forEach(Libro => {
                 const tr = document.createElement("tr");
-
+                // Inserta los datos del libro en la fila de la tabla
                 tr.innerHTML = `
                     <td>${Libro.id}</td>
                     <td>${Libro.titulo}</td>
@@ -21,88 +23,94 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
                 `;
 
-                // Añadir evento al botón desde JS (mejor práctica)
+                // Añadir evento al botón desde JS
                 const btn = tr.querySelector(".btn-confirmar");
                 btn.addEventListener("click", () => Solicitar(btn));
-
+                // Agrega la fila a la tabla
                 tbody.appendChild(tr);
             });
         });
 });
-//Sacar los datos de la tabla y ponerlos en el modal
+// Función que maneja la solicitud de un libro cuando el usuario hace clic en "Solicitar"
 function Solicitar(btn) {
     const fila = btn.closest("tr");
     const celdas = fila.children;
-
+    // Almacena la información del libro seleccionado
     libroSeleccionado = {
         id: celdas[0].textContent.trim(),
         titulo: celdas[1].textContent.trim()
 
     };
 
-    // Mostrar datos en el modal
+    // Muestra la información del libro en el modal
     document.getElementById("modalId").textContent = celdas[0].textContent;
     document.getElementById("modalLibro").textContent = celdas[1].textContent;
     document.getElementById("modalAutor").textContent = celdas[2].textContent;
     document.getElementById("modalGenero").textContent = celdas[3].textContent;
 
-    // Configurar fechas
+    // Configura las fechas de inicio y fin del préstamo
     const hoy = new Date();
     const maxInicio = new Date();
-    maxInicio.setDate(hoy.getDate() + 3);
+    maxInicio.setDate(hoy.getDate() + 3);// Fecha de inicio como máximo 3 días después de hoy
 
     const fechaInicioInput = document.getElementById("fechaInicio");
     fechaInicioInput.min = hoy.toISOString().split('T')[0];
     fechaInicioInput.max = maxInicio.toISOString().split('T')[0];
-    fechaInicioInput.value = '';
+    fechaInicioInput.value = '';// Se borra el valor por defecto
 
     const fechaFinInput = document.getElementById("fechaFin");
-    fechaFinInput.value = '';
-    fechaFinInput.min = '';
-    fechaFinInput.max = '';
-
+    fechaFinInput.value = '';// Se borra el valor por defecto
+    fechaFinInput.min = '';// Se restablece el valor mínimo
+    fechaFinInput.max = '';// Se restablece el valor máximo
+    //muestra el modal
     document.getElementById("modal").style.display = "block";
 }
+/*
+ * Cierra el modal de solicitud de libro.
+ */
 function cerrarModal() {
     document.getElementById("modal").style.display = "none";
 }
-// ajusto la fecha fin
+// Ajusta la fecha final en función de la fecha de inicio seleccionada
 document.getElementById("fechaInicio").addEventListener("change", function () {
     const inicio = new Date(this.value);
-    if (isNaN(inicio)) return;
+    if (isNaN(inicio)) return;// Si la fecha de inicio no es válida, no hace nada
 
     const minFin = new Date(inicio);
-    minFin.setDate(minFin.getDate() + 1); // mínimo 1 día después
+    minFin.setDate(minFin.getDate() + 1); // La fecha final debe ser al menos 1 día después
 
     const maxFin = new Date(inicio);
-    maxFin.setDate(maxFin.getDate() + 20); // máximo 20 días después
+    maxFin.setDate(maxFin.getDate() + 20); // La fecha final puede ser máximo 20 días después
 
     const fechaFinInput = document.getElementById("fechaFin");
-    fechaFinInput.min = minFin.toISOString().split('T')[0];
-    fechaFinInput.max = maxFin.toISOString().split('T')[0];
-    fechaFinInput.value = '';
+    fechaFinInput.min = minFin.toISOString().split('T')[0];// Establece el valor mínimo para la fecha final
+    fechaFinInput.max = maxFin.toISOString().split('T')[0];// Establece el valor máximo para la fecha final
+    fechaFinInput.value = '';// Resetea el valor de fecha final
 });
-//comunicacion con el backend
+/*
+ * Función que comunica la solicitud al backend para registrar la solicitud de préstamo.
+ * Se envía la fecha de inicio, fecha de fin y otros datos necesarios.
+ */
 function confirmarSolicitud() {
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaFin = document.getElementById("fechaFin").value;
-
+    // Verifica que ambas fechas estén seleccionadas
     if (!fechaInicio || !fechaFin) {
         alert("Por favor, selecciona ambas fechas.");
         return;
     }
 
-    // Obtener fecha actual (formato YYYY-MM-DD)
+    // Obtener fecha actual en formato YYYY-MM-DD
     const hoy = new Date();
     const fechaSolicitud = hoy.toISOString().split('T')[0];
-
+    // Crea el objeto de datos para la solicitud
     const datos = new URLSearchParams();
     datos.append("id_libro", libroSeleccionado.id);
     datos.append("fecha_inicio", fechaInicio);
     datos.append("fecha_fin", fechaFin);
-    datos.append("id_usuario", idUsuario); // Ya está disponible en JS
+    datos.append("id_usuario", idUsuario); // idUsuario está disponible en el contexto
     datos.append("fecha_solicitud", fechaSolicitud);
-
+    // Envia los datos al backend para procesar la solicitud
     fetch('/SistemaBiblioteca/public/action.php?action=solicitarLibro', {
         method: 'POST',
         headers: {
@@ -115,7 +123,7 @@ function confirmarSolicitud() {
         if (data.success) {
             alert("Solicitud realizada con éxito.");
             cerrarModal();
-            location.reload(); // Recargar para actualizar
+            location.reload(); // Recarga la página para actualizar la tabla
         } else {
             alert("Error al realizar la solicitud: " + data.message);
         }

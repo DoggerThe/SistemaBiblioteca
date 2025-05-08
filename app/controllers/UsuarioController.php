@@ -4,27 +4,29 @@ require_once __DIR__ . '/../models/Usuario.php';
 
 class UserController {
     private $model;
-
+    // Constructor: instancia el modelo Usuario
     public function __construct() {
-        // Creamos instancia del modelo
         $this->model = new Usuario();
     }
-
+    /**
+     * Procesa el registro de un nuevo usuario.
+     * 
+     * $post Datos enviados desde el formulario de registro.
+     */
     public function register(array $post) {
         // 1. Validar que no estén vacíos
         foreach (['cedula','nombre','apellido','email','direccion','password'] as $field) {
             if (empty($post[$field])) {
+                // Almacena mensaje de error y redirige al formulario
                 $_SESSION['error'] = "El campo $field es obligatorio.";
                 header('Location: /SistemaBiblioteca/app/views/usuarios/registerUser.php');
                 exit;
-                //echo "El campo $field es obligatorio."; return;
             }
         }
         // 2. Evitar duplicados
         if ($this->model->existsCedula($post['cedula'])) {
-            //echo "La cédula ya existe."; return;
             $_SESSION['error'] = "La cédula ya existe.";
-            //guardado de todo para mantenerlo en caso de que exista la cedula.
+            // Almacena datos antiguos para repoblar el formulario
             $_SESSION['old'] = [
                 'cedula' => $post['cedula'],
                 'nombre' => $post['nombre'],
@@ -44,10 +46,13 @@ class UserController {
             $_SESSION['error'] = "Error al registrar.";
             header('Location: /SistemaBiblioteca/app/views/usuarios/registerUser.php');
             exit;
-            //echo "Error al registrar.";
         }
     }
-
+    /**
+     * Muestra el perfil del usuario en formato JSON.
+     * 
+     * $usuario_id ID del usuario a consultar.
+     */
     public function verPerfil($usuario_id) {
         $usuario = $this->model->obtenerUsuarioPorId($usuario_id);
         if ($usuario) {
@@ -56,9 +61,13 @@ class UserController {
             echo json_encode(['error' => 'Usuario no encontrado.']);
         }
     }
-    
+    /**
+     * Cambia la contraseña de un usuario.
+     * 
+     * $data Arreglo con 'usuario_id', 'antigua' y 'nueva' contraseñas.
+     */
     public function cambiarPassword($data) {
-        // Validar contraseña actual directamente en el modelo
+        // Verifica si la contraseña actual es correcta
         $verificada = $this->model->verificarPasswordActual($data['usuario_id'], $data['antigua']);
     
         if (!$verificada) {
@@ -66,7 +75,7 @@ class UserController {
             return;
         }
     
-        // Si está verificada, procede al cambio
+        // Si es correcta, genera el hash de la nueva y actualiza
         $nuevaHash = password_hash($data['nueva'], PASSWORD_BCRYPT);
         $result = $this->model->actualizarPassword($data['usuario_id'], $nuevaHash);
     

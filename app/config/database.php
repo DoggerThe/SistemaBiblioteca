@@ -6,7 +6,6 @@ class database {
     private $user   = 'root'; //Usuario de la base de datos
     private $pass   = 'root'; //Depende de que se pusiera en la BD al crearla
     private $pdo;
-
     // Método que devuelve la conexión PDO
     public function connect() {
         if ($this->pdo === null) {

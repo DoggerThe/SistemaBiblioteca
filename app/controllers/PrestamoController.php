@@ -3,41 +3,63 @@ require_once __DIR__ . '/../models/Prestamo.php';
 
 class PrestamoController {
     private $model;
-
+    // Constructor: instancia el modelo Prestamo
     public function __construct() {
         $this->model = new Prestamo();
     }
-    //Check
+    /**
+     * Busca préstamos activos que coincidan con un término dado.
+     * Utilizado para filtrar resultados en tiempo real.
+     * 
+     * $post Arreglo con la clave 'termino' (opcional).
+     */
     public function buscarActivos(array $post) {
         $termino = $post['termino'] ?? '';
         $resultados = $this->model->buscarPrestamosActivos($termino);
         echo json_encode($resultados);
     }
-    //Check
+    /**
+     * Busca préstamos inactivos que coincidan con un término dado.
+     * Generalmente, se refiere a préstamos finalizados o cancelados.
+     * 
+     * $post Arreglo con la clave 'termino' (opcional).
+     */
     public function buscarInactivos(array $post) {
         $termino = $post['termino'] ?? '';
         $resultados = $this->model->buscarPrestamosInactivos($termino);
         echo json_encode($resultados);
     }
-    //agregar un nuevo metodo para listar los prestamos pendientes check
+    /**
+     * Lista todas las solicitudes de préstamo pendientes de aprobación.
+     * Útil para personal administrativo o bibliotecario.
+     */
     public function listarPendientes() {
         $resultados = $this->model->listarSolicitudesPendientes();
         echo json_encode($resultados);
     }
-
-
+    /**
+     * Acepta una solicitud de préstamo pendiente.
+     * Cambia su estado a "aceptado" y actualiza disponibilidad del libro.
+     * 
+     * $id ID de la solicitud de préstamo.
+     */
     public function aceptarPrestamo($id) {
         $resultado = $this->model->aceptarPrestamo($id);
         echo json_encode($resultado);
     }
-
+    /**
+     * Crea una nueva solicitud de préstamo.
+     * Requiere datos como usuario, libro y fechas involucradas.
+     * 
+     * $post Arreglo con claves: id_libro, id_usuario, fecha_solicitud, fecha_inicio, fecha_fin.
+     */
     public function crearSolicitud(array $post) {
         $id_libro = $post['id_libro'] ?? null;
         $id_usuario = $post['id_usuario'] ?? null;
         $fecha_solicitud = $post['fecha_solicitud'] ?? null;
         $fecha_inicio = $post['fecha_inicio'] ?? null;
         $fecha_fin = $post['fecha_fin'] ?? null;
-    
+        // Validación de campos obligatorios
         if (!$id_libro || !$id_usuario || !$fecha_solicitud || !$fecha_inicio || !$fecha_fin) {
             echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
             return;
@@ -47,7 +69,11 @@ class PrestamoController {
     
         echo json_encode(['success' => $resultado]);
     }
-
+    /**
+     * Lista todos los libros prestados actualmente a un usuario específico.
+     * 
+     * $usuario_id ID del usuario.
+     */
     public function listarLibrosUsuario($usuario_id) {
         $resultados = $this->model->listarLibrosPrestados($usuario_id);
         echo json_encode($resultados);

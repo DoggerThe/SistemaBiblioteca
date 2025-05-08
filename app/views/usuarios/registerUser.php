@@ -3,12 +3,14 @@ session_start(); // Muy importante para leer $_SESSION
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Biblioteca</title>
-    <link rel="stylesheet"  href="/SistemaBiblioteca/public/css/RegisInis.css">
+    <meta charset="UTF-8"> <!-- Codificación de caracteres en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptabilidad a dispositivos móviles -->
+    <title>Registro Biblioteca</title> <!-- Título del documento -->
+    <link rel="stylesheet" href="/SistemaBiblioteca/public/css/RegisInis.css"> <!-- Enlace al archivo CSS del formulario -->
 </head>
+
 <body>
     <div class="contenedor-principal">
         <!-- Columna izquierda con imagen decorativa -->
@@ -21,47 +23,46 @@ session_start(); // Muy importante para leer $_SESSION
             <img src="/SistemaBiblioteca/public/img/Logobiblioteca.png" alt="Logo Biblioteca" class="logo">
             <div class="contenedor-formulario">
                 <h1>Biblioteca</h1>
-                <!--prueba-->
+                <!-- Mostrar error en caso de que exista un mensaje en la sesión -->
                 <?php if (isset($_SESSION['error'])): ?>
-                  <div style="color: red;">
-                      <?php
-                      echo $_SESSION['error'];
-                      unset($_SESSION['error']); // Para que no siga mostrando después
-                      ?>
-                  </div>
+                    <div style="color: red;">
+                        <?php
+                        echo $_SESSION['error']; // Se imprime el mensaje de error
+                        unset($_SESSION['error']); // Se elimina el mensaje para no mostrarlo repetidamente
+                        ?>
+                    </div>
                 <?php endif; ?>
                 <?php
-                  $old = $_SESSION['old'] ?? []; // si existe old, lo usamos; si no, array vacío
-                  unset($_SESSION['old']); // limpiamos para la próxima vez
+                $old = $_SESSION['old'] ?? []; // Guarda los valores anteriores del formulario para no perderlos
+                unset($_SESSION['old']); // Limpia después de usarlos
                 ?>
-                <!--prueba-->
                 <form action="/SistemaBiblioteca/public/action.php?action=register" method="POST" onsubmit="return validarContrasenas()">
-                <!-- Colocar los values -->
+                    <!-- Campo: Nombre -->
                     <div class="grupo-formulario">
                         <label for="nombre">NOMBRE</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="<?= htmlspecialchars($old['nombre'] ?? '') ?>" required>
                     </div>
-                    
+                    <!-- Campo: Apellido -->
                     <div class="grupo-formulario">
                         <label for="apellido">APELLIDO</label>
-                        <input type="text" id="apellido" name="apellido"placeholder="Apellido" value="<?= htmlspecialchars($old['apellido'] ?? '') ?>" required>
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" value="<?= htmlspecialchars($old['apellido'] ?? '') ?>" required>
                     </div>
-                    
+                    <!-- Campo: Cédula -->
                     <div class="grupo-formulario">
                         <label for="cedula">CÉDULA</label>
                         <input type="text" id="cedula" name="cedula" maxlength="10" minlength="10" placeholder="0999999999" value="<?= htmlspecialchars($old['cedula'] ?? '') ?>" required>
                     </div>
-                    
+                    <!-- Campo: Correo electrónico -->
                     <div class="grupo-formulario">
                         <label for="email">CORREO ELECTRÓNICO</label>
-                        <input type="email" id="email" name="email"placeholder="correo@example.com" value="<?= htmlspecialchars($old['email'] ?? '') ?>" required>
+                        <input type="email" id="email" name="email" placeholder="correo@example.com" value="<?= htmlspecialchars($old['email'] ?? '') ?>" required>
                     </div>
-                    
+                    <!-- Campo: Dirección -->
                     <div class="grupo-formulario">
                         <label for="direccion">DIRECCIÓN</label>
                         <input type="text" id="direccion" name="direccion" placeholder="Direccion" value="<?= htmlspecialchars($old['direccion'] ?? '') ?>" required>
                     </div>
-                    
+                    <!-- Campo: Contraseña -->
                     <div class="grupo-formulario">
                         <label for="contrasena">CONTRASEÑA</label>
                         <div class="contrasena-container">
@@ -69,7 +70,7 @@ session_start(); // Muy importante para leer $_SESSION
                             <input type="checkbox" onclick="mostrarContrasena('contrasena')">
                         </div>
                     </div>
-                    
+                    <!-- Campo: Confirmar contraseña -->
                     <div class="grupo-formulario">
                         <label for="confirmar">CONFIRMAR CONTRASEÑA</label>
                         <div class="contrasena-container">
@@ -77,7 +78,7 @@ session_start(); // Muy importante para leer $_SESSION
                             <input type="checkbox" onclick="mostrarContrasena('confirmar')">
                         </div>
                     </div>
-                
+
                     <button type="submit" class="boton-registro">REGISTRARME</button>
 
                     <div id="modal" class="modal">
@@ -92,6 +93,7 @@ session_start(); // Muy importante para leer $_SESSION
             </div>
         </div>
     </div>
-      <script src="/SistemaBiblioteca/public/js/ValidaContra.js"></script>
+    <script src="/SistemaBiblioteca/public/js/ValidaContra.js"></script>
 </body>
+
 </html>
