@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../models/Libro.php';
 
-class LibroController {
+class LibroController
+{
     private $model;
     // Constructor: instancia el modelo Libro
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new Libro();
     }
 
@@ -14,7 +16,8 @@ class LibroController {
      *
      * $post Debe incluir el índice 'termino', que es la cadena de búsqueda.
      */
-    public function buscar_libro(array $post) {
+    public function buscar_libro(array $post)
+    {
         // Establece el tipo de respuesta como JSON
         header('Content-Type: application/json');
         // Si no se envía un término de búsqueda, se devuelve un array vacío
@@ -30,7 +33,8 @@ class LibroController {
      * Lista todos los libros actualmente disponibles para préstamo.
      * Se utiliza para mostrar al usuario final solo los libros que pueden ser solicitados.
      */
-    public function listarLibrosDisponibles() {
+    public function listarLibrosDisponibles()
+    {
         $resultados = $this->model->listarLibrosDisponibles();
         echo json_encode($resultados); // Devuelve el listado de libros disponibles en formato JSON
     }

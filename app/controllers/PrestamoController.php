@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../models/Prestamo.php';
 
-class PrestamoController {
+class PrestamoController
+{
     private $model;
     // Constructor: instancia el modelo Prestamo
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new Prestamo();
     }
     /**
@@ -13,7 +15,8 @@ class PrestamoController {
      * 
      * $post Arreglo con la clave 'termino' (opcional).
      */
-    public function buscarActivos(array $post) {
+    public function buscarActivos(array $post)
+    {
         $termino = $post['termino'] ?? '';
         $resultados = $this->model->buscarPrestamosActivos($termino);
         echo json_encode($resultados);
@@ -24,7 +27,8 @@ class PrestamoController {
      * 
      * $post Arreglo con la clave 'termino' (opcional).
      */
-    public function buscarInactivos(array $post) {
+    public function buscarInactivos(array $post)
+    {
         $termino = $post['termino'] ?? '';
         $resultados = $this->model->buscarPrestamosInactivos($termino);
         echo json_encode($resultados);
@@ -33,7 +37,8 @@ class PrestamoController {
      * Lista todas las solicitudes de préstamo pendientes de aprobación.
      * Útil para personal administrativo o bibliotecario.
      */
-    public function listarPendientes() {
+    public function listarPendientes()
+    {
         $resultados = $this->model->listarSolicitudesPendientes();
         echo json_encode($resultados);
     }
@@ -43,7 +48,8 @@ class PrestamoController {
      * 
      * $id ID de la solicitud de préstamo.
      */
-    public function aceptarPrestamo($id) {
+    public function aceptarPrestamo($id)
+    {
         $resultado = $this->model->aceptarPrestamo($id);
         echo json_encode($resultado);
     }
@@ -53,7 +59,8 @@ class PrestamoController {
      * 
      * $post Arreglo con claves: id_libro, id_usuario, fecha_solicitud, fecha_inicio, fecha_fin.
      */
-    public function crearSolicitud(array $post) {
+    public function crearSolicitud(array $post)
+    {
         $id_libro = $post['id_libro'] ?? null;
         $id_usuario = $post['id_usuario'] ?? null;
         $fecha_solicitud = $post['fecha_solicitud'] ?? null;
@@ -64,9 +71,9 @@ class PrestamoController {
             echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
             return;
         }
-    
+
         $resultado = $this->model->crearSolicitud($id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin);
-    
+
         echo json_encode(['success' => $resultado]);
     }
     /**
@@ -74,7 +81,8 @@ class PrestamoController {
      * 
      * $usuario_id ID del usuario.
      */
-    public function listarLibrosUsuario($usuario_id) {
+    public function listarLibrosUsuario($usuario_id)
+    {
         $resultados = $this->model->listarLibrosPrestados($usuario_id);
         echo json_encode($resultados);
     }
