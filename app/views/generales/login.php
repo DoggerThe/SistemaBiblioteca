@@ -40,7 +40,7 @@
                 <!-- Área donde se mostrarán mensajes de error si los datos son incorrectos -->
                 <div id="mensaje-error" style="color: red; margin-top: 10px;"></div>
                 <!-- Enlace para redirigir a la página de registro si el usuario no tiene cuenta -->
-                <p class="texto-inicio-sesion">¿No tienes cuenta? <a href="/SistemaBiblioteca/app/views/usuarios/registerUser.php">REGISTRARME</a></p>
+                <p class="texto-inicio-sesion">¿No tienes cuenta? <a href="/SistemaBiblioteca/app/views/generales/register.php">REGISTRARME</a></p>
             </div>
         </div>
     </div>

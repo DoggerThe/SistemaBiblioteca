@@ -21,7 +21,7 @@ requireRole(2); // 2 es el rol de bibliotecario
 
             <div class="button-group"> <!-- Grupo de botones de usuario -->
                 <!-- Botón para cerrar sesión -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
+                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>
                 <!-- Botón con imagen del usuario (aquí no tiene funcionalidad concreta aún) -->
                 <button class="image-button" onclick="location.href='#'">
                     <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
@@ -45,8 +45,8 @@ requireRole(2); // 2 es el rol de bibliotecario
             <div class="Container-1">
                 <!-- Barra de búsqueda para préstamos activos -->
                 <div class="Container-barra">
-                    <form class="barra-busqueda" onsubmit="buscarActivos(event)">
-                        <input type="text" id="busqueda" placeholder="Buscar Id Préstamos Activos...">
+                    <form class="barra-busqueda" id="BusquedaActivos">
+                        <input type="text" id="busquedaAct" name="busquedaAct" placeholder="Buscar Id Préstamos Activos...">
                         <button type="submit">🔍</button>
                     </form>
                 </div>
@@ -75,8 +75,8 @@ requireRole(2); // 2 es el rol de bibliotecario
             <div class="Container-2">
                 <!-- Barra de búsqueda para préstamos inactivos -->
                 <div class="Container-barra">
-                    <form class="barra-busqueda" onsubmit="buscarInactivos(event)">
-                        <input type="text" id="busqueda" placeholder="Buscar Id Préstamos Inactivo...">
+                    <form class="barra-busqueda" id="BusquedaInactivos">
+                        <input type="text" id="busquedaInac" name="busquedaInac" placeholder="Buscar Id Préstamos Inactivo...">
                         <button type="submit">🔍</button>
                     </form>
                 </div>
@@ -102,7 +102,8 @@ requireRole(2); // 2 es el rol de bibliotecario
                 </div>
             </div>
         </div>
-        <script src="/SistemaBiblioteca/public/js/prestamoBusqueda.js"></script>
+    </div>
+    <script src="/SistemaBiblioteca/public/js/prestamoBusqueda.js"></script>
 </body>
 
 </html>

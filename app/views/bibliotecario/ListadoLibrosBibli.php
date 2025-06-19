@@ -21,7 +21,7 @@ requireRole(2); // 2 es el rol de bibliotecario
       <a href="InicioBibliotec.php">Bienvenido Bibliotecario</a></h1>
       <div class="button-group">
         <!-- Botón para cerrar sesión -->
-        <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
+        <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button><!-- Cambiado -->
         <!-- Botón con ícono de usuario (sin funcionalidad asignada aún) -->
         <button class="image-button" onclick="location.href='#'">
           <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
@@ -44,8 +44,8 @@ requireRole(2); // 2 es el rol de bibliotecario
     <!-- Tabla que mostrará la lista de libros recuperados desde la base de datos -->
     <div class="container-General">
       <div class="Container-barra">
-        <form class="barra-busqueda" onsubmit="buscar(event)">
-          <input type="text" id="busqueda" placeholder="Buscar...">
+        <form class="barra-busqueda" id="form-busqueda">
+          <input type="text" id="busqueda" name="busqueda" placeholder="Buscar...">
           <button type="submit">🔍</button>
         </form>
       </div>

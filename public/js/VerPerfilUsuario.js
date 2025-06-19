@@ -1,14 +1,12 @@
 // Espera a que el DOM esté completamente cargado para iniciar la solicitud de datos del perfil
 document.addEventListener("DOMContentLoaded", function () {
     // Realiza una petición POST para obtener los datos del usuario
-    fetch("/SistemaBiblioteca/public/action.php?action=verPerfilUsuario", {
+    fetch("/SistemaBiblioteca/index.php?action=verPerfilUsuario", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
-            usuario_id: idUsuario, //Usando la variable global idUsuario para obtener el ID del usuario
-        }),
+        body: `usuario_id=${encodeURIComponent(idUsuario)}`
     })
         .then((res) => res.json())
         .then((usuario) => {
@@ -77,7 +75,7 @@ function confirmarCambio() {
     }
 
     // Envío de la solicitud para actualizar la contraseña
-    fetch("/SistemaBiblioteca/public/action.php?action=cambiarPassword", {
+    fetch("/SistemaBiblioteca/index.php?action=cambiarPassword", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -96,7 +94,7 @@ function confirmarCambio() {
             }
         })
         .catch((err) => {
-            console.error(err);
+            console.error(err.message);
             alert("Error en la conexión.");
         });
 }

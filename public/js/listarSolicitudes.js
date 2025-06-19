@@ -6,36 +6,45 @@ let prestamoSeleccionado = null;
  * y mostrarlas en la tabla correspondiente.
  */
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('/SistemaBiblioteca/public/action.php?action=listarSolicitudesPendientes')
+    fetch('/SistemaBiblioteca/index.php?action=listarSolicitudesPendientes')
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector("#tablaLibros tbody");
             tbody.innerHTML = ""; // Limpia cualquier contenido previo
 
-            data.forEach(prestamo => {
+            if (data.length === 0) {
+                // Si no hay solicitudes, muestra un mensaje en la tabla
                 const tr = document.createElement("tr");
-                // Inserta la información del préstamo en la fila
-                tr.innerHTML = `
-                    <td>${prestamo.id_prestamo}</td>
-                    <td>${prestamo.cedula_usuario}</td>
-                    <td>${prestamo.titulo_libro}</td>
-                    <td>${prestamo.fecha_solicitud}</td>
-                    <td>${prestamo.fecha_inicio}</td>
-                    <td>${prestamo.fecha_fin}</td>
-                    <td>${prestamo.estado}</td>
-                    <td class="acciones">
-                        <button class="btn-confirmar" title="Confirmar">
-                            <i class="fas fa-check"></i> Confirmar
-                        </button>
-                    </td>
-                `;
-
-                // Añade evento al botón de confirmar desde JS
-                const btn = tr.querySelector(".btn-confirmar");
-                btn.addEventListener("click", () => Confirmar(btn));
-                // Agrega la fila al cuerpo de la tabla
+                tr.innerHTML = `<td colspan="8" class="text-center">No hay solicitudes pendientes</td>`;
                 tbody.appendChild(tr);
-            });
+                return; // Sale de la función si no hay datos
+            }
+            else{
+                data.forEach(prestamo => {
+                    const tr = document.createElement("tr");
+                    // Inserta la información del préstamo en la fila
+                    tr.innerHTML = `
+                        <td>${prestamo.id_prestamo}</td>
+                        <td>${prestamo.cedula_usuario}</td>
+                        <td>${prestamo.titulo_libro}</td>
+                        <td>${prestamo.fecha_solicitud}</td>
+                        <td>${prestamo.fecha_inicio}</td>
+                        <td>${prestamo.fecha_fin}</td>
+                        <td>${prestamo.estado}</td>
+                        <td class="acciones">
+                            <button class="btn-confirmar" title="Confirmar">
+                                <i class="fas fa-check"></i> Confirmar
+                            </button>
+                        </td>
+                    `;
+    
+                    // Añade evento al botón de confirmar desde JS
+                    const btn = tr.querySelector(".btn-confirmar");
+                    btn.addEventListener("click", () => Confirmar(btn));
+                    // Agrega la fila al cuerpo de la tabla
+                    tbody.appendChild(tr);
+                });
+            }
         });
 });
 /*
@@ -70,7 +79,7 @@ function cerrarModal() {
  * Se llama desde un botón dentro del modal para confirmar la acción del préstamo.
  */
 function cambiarEstado() {
-    fetch('/SistemaBiblioteca/public/action.php?action=aceptarPrestamo', {
+    fetch('/SistemaBiblioteca/index.php?action=aceptarPrestamo', {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

@@ -36,7 +36,7 @@ session_start(); // Muy importante para leer $_SESSION
                 $old = $_SESSION['old'] ?? []; // Guarda los valores anteriores del formulario para no perderlos
                 unset($_SESSION['old']); // Limpia después de usarlos
                 ?>
-                <form action="/SistemaBiblioteca/public/action.php?action=register" method="POST" onsubmit="return validarContrasenas()">
+                <form action="/SistemaBiblioteca/index.php?action=registrar" method="POST" onsubmit="return validarContrasenas()">
                     <!-- Campo: Nombre -->
                     <div class="grupo-formulario">
                         <label for="nombre">NOMBRE</label>
@@ -89,7 +89,7 @@ session_start(); // Muy importante para leer $_SESSION
                         </div>
                     </div>
                 </form>
-                <p class="texto-inicio-sesion">¿Ya tienes cuenta? <a href="/SistemaBiblioteca/app/views/usuarios/login.php">Iniciar sesión</a></p>
+                <p class="texto-inicio-sesion">¿Ya tienes cuenta? <a href="/SistemaBiblioteca/app/views/generales/login.php"> INICIAR SESIÓN </p>
             </div>
         </div>
     </div>

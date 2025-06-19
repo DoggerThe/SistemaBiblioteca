@@ -5,9 +5,9 @@ class LoginController
 {
     private $model;
     // Constructor: instancia el modelo Usuario
-    public function __construct()
+    public function __construct($pdo)
     {
-        $this->model = new Usuario();
+        $this->model = New Usuario($pdo);
     }
     /**
      * Maneja el proceso de inicio de sesión.
@@ -18,7 +18,7 @@ class LoginController
      */
     public function login(array $post)
     {
-        // Define la respuesta como tipo JSON para el cliente (por ejemplo, AJAX)
+        // Define la respuesta como tipo JSON para el cliente
         header('Content-Type: application/json');
         // Validación básica: verificar si se proporcionaron las credenciales
         if (empty($post['usuario']) || empty($post['contrasena'])) {
@@ -58,7 +58,7 @@ class LoginController
         session_unset(); // Limpia todas las variables de sesión
         session_destroy(); // Destruye la sesión por completo
         // Redireccionar al index público
-        header('Location: /SistemaBiblioteca/public/index.php');
+        header('Location: /SistemaBiblioteca/app/views/generales/lobby.php');
         exit;
     }
 }

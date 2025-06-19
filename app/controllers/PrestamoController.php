@@ -5,9 +5,9 @@ class PrestamoController
 {
     private $model;
     // Constructor: instancia el modelo Prestamo
-    public function __construct()
+    public function __construct($pdo)
     {
-        $this->model = new Prestamo();
+        $this->model = new Prestamo($pdo);
     }
     /**
      * Busca préstamos activos que coincidan con un término dado.
@@ -17,7 +17,7 @@ class PrestamoController
      */
     public function buscarActivos(array $post)
     {
-        $termino = $post['termino'] ?? '';
+        $termino = $post['q'] ?? '';
         $resultados = $this->model->buscarPrestamosActivos($termino);
         echo json_encode($resultados);
     }
@@ -29,7 +29,7 @@ class PrestamoController
      */
     public function buscarInactivos(array $post)
     {
-        $termino = $post['termino'] ?? '';
+        $termino = $post['q'] ?? '';
         $resultados = $this->model->buscarPrestamosInactivos($termino);
         echo json_encode($resultados);
     }
@@ -48,8 +48,9 @@ class PrestamoController
      * 
      * $id ID de la solicitud de préstamo.
      */
-    public function aceptarPrestamo($id)
+    public function aceptarPrestamo($dato)
     {
+        $id = $dato['id'] ?? null;
         $resultado = $this->model->aceptarPrestamo($id);
         echo json_encode($resultado);
     }
@@ -81,9 +82,20 @@ class PrestamoController
      * 
      * $usuario_id ID del usuario.
      */
-    public function listarLibrosUsuario($usuario_id)
+    public function listarLibrosUsuario($post)
     {
-        $resultados = $this->model->listarLibrosPrestados($usuario_id);
+        $resultados = $this->model->listarLibrosPrestados($post['usuario_id']);
+        echo json_encode($resultados);
+    }
+
+    public function obtenerActivos()
+    {
+        $resultados = $this->model->obtenerListaPrestamos("1");
+        echo json_encode($resultados);
+    }
+    public function obtenerInactivos()
+    {
+        $resultados = $this->model->obtenerListaPrestamos("2");
         echo json_encode($resultados);
     }
 }

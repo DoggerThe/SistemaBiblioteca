@@ -20,7 +20,7 @@ requireRole(1); // 1 es el rol de usuario normal
             <h1 class="welcome"><a href="InicioUser.php">Bienvenido</a></h1>
             <div class="button-group">
                 <!-- Botón para cerrar sesión -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
+                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>
                 <!-- Botón con imagen que redirige al perfil del usuario -->
                 <button class="image-button" onclick="location.href='/SistemaBiblioteca/app/views/usuarios/VerPerfilUsuario.php'">
                     <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">

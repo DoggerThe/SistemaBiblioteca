@@ -5,9 +5,25 @@ class Prestamo
 {
     private $db;
     // Constructor: crea la conexión a la base de datos
-    public function __construct()
+    public function __construct($pdo)
     {
-        $this->db = (new database())->connect();
+        $this->db = $pdo;
+    }
+    public function obtenerListaPrestamos($estado){
+        $conn = $this->db;
+        $stmt = $conn->prepare("
+            SELECT p.id AS id_prestamo, u.cedula AS cedula_usuario, l.titulo AS titulo_libro,
+                   p.fecha_solicitud, p.fecha_inicio, p.fecha_fin, e.nombre AS estado
+            FROM prestamos p
+            JOIN usuarios u ON p.usuario_id = u.id
+            JOIN libros l ON p.libro_id = l.id
+            JOIN estados_prestamo e ON p.estado_id = e.id
+            WHERE p.estado_id = ?
+            ORDER BY p.id DESC
+            LIMIT 10
+        ");
+        $stmt->execute([$estado]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     // Buscar préstamos activos filtrando por cédula del usuario

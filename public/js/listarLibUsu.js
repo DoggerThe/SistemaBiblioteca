@@ -1,34 +1,41 @@
 // Evento que se ejecuta cuando el DOM ha sido completamente cargado.
 // Solicita al backend la lista de libros disponibles y los muestra en la tabla.
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('/SistemaBiblioteca/public/action.php?action=listarLibrosDisponibles')
+    fetch('/SistemaBiblioteca/index.php?action=listarLibrosDisponibles')
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector("#tablaLibros tbody");
             tbody.innerHTML = "";// Limpia la tabla antes de agregar nuevos datos
 
-            data.forEach(Libro => {
+            if (data.length === 0){
                 const tr = document.createElement("tr");
-                // Inserta los datos del libro en la fila de la tabla
-                tr.innerHTML = `
-                    <td>${Libro.id}</td>
-                    <td>${Libro.titulo}</td>
-                    <td>${Libro.autor}</td>
-                    <td>${Libro.genero}</td>
-                    <td>${Libro.cantidad}</td>
-                    <td class="acciones">
-                        <button class="btn-confirmar" title="Confirmar">
-                            <i class="fas fa-check"></i> Solicitar
-                        </button>
-                    </td>
-                `;
-
-                // Añadir evento al botón desde JS
-                const btn = tr.querySelector(".btn-confirmar");
-                btn.addEventListener("click", () => Solicitar(btn));
-                // Agrega la fila a la tabla
+                tr.innerHTML = `<td colspan = "6" class="text-center">No hay libros para solicitar :C</td>`;
                 tbody.appendChild(tr);
-            });
+                return;
+            }else{
+                data.forEach(Libro => {
+                    const tr = document.createElement("tr");
+                    // Inserta los datos del libro en la fila de la tabla
+                    tr.innerHTML = `
+                        <td>${Libro.id}</td>
+                        <td>${Libro.titulo}</td>
+                        <td>${Libro.autor}</td>
+                        <td>${Libro.genero}</td>
+                        <td>${Libro.cantidad}</td>
+                        <td class="acciones">
+                            <button class="btn-confirmar" title="Confirmar">
+                                <i class="fas fa-check"></i> Solicitar
+                            </button>
+                        </td>
+                    `;
+    
+                    // Añadir evento al botón desde JS
+                    const btn = tr.querySelector(".btn-confirmar");
+                    btn.addEventListener("click", () => Solicitar(btn));
+                    // Agrega la fila a la tabla
+                    tbody.appendChild(tr);
+                });
+            }
         });
 });
 // Función que maneja la solicitud de un libro cuando el usuario hace clic en "Solicitar"
@@ -110,8 +117,9 @@ function confirmarSolicitud() {
     datos.append("fecha_fin", fechaFin);
     datos.append("id_usuario", idUsuario); // idUsuario está disponible en el contexto
     datos.append("fecha_solicitud", fechaSolicitud);
+
     // Envia los datos al backend para procesar la solicitud
-    fetch('/SistemaBiblioteca/public/action.php?action=solicitarLibro', {
+    fetch('/SistemaBiblioteca/index.php?action=solicitarLibro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

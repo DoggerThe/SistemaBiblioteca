@@ -1,30 +1,21 @@
-// Función que maneja el evento de búsqueda
-function buscar(event) {
-    event.preventDefault(); // Evita que se recargue la página al enviar el formulario
-    // Obtiene el término de búsqueda desde el input con id 'busqueda'
-    const termino = document.getElementById('busqueda').value;
-    // Realiza una solicitud POST al servidor para buscar los libros
-    fetch('/SistemaBiblioteca/public/action.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',// Define el tipo de contenido como URL-encoded
-        },
-        body: new URLSearchParams({
-            action: 'buscar',// Indica que la acción es buscar
-            termino: termino// El término de búsqueda que el usuario ingresó
-        })
-    })
+cargarTablaLibros();
 
-    .then(response => response.json())// Convierte la respuesta en formato JSON
-    .then(libros => {
-        // Selecciona el cuerpo de la tabla donde se mostrarán los libros encontrados
+
+async function cargarTablaLibros() {
+    try {
+        const response = await fetch('/SistemaBiblioteca/index.php?action=obtenerLibros');
+        if (!response.ok) {
+            throw new Error('Error al cargar los libros');
+        }
+        const libros = await response.json();
+
         const tbody = document.querySelector('#tablaLibros tbody');
-        tbody.innerHTML = ''; // Limpia la tabla antes de insertar nuevos resultados
-        // Si no se encontraron libros, se muestra un mensaje de "No se encontraron resultados"
+        tbody.innerHTML = ''; // Limpia la tabla antes de insertar nuevos datos
         if (libros.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="3">No se encontraron resultados</td></tr>';
+            // Si no hay libros, muestra un mensaje
+            tbody.innerHTML = '<tr><td colspan="3">No hay libros disponibles</td></tr>';
         } else {
-            // Si hay libros encontrados, se agregan las filas a la tabla
+            // Si hay libros, los agrega a la tabla
             libros.forEach(libro => {
                 const fila = `
                     <tr>
@@ -33,12 +24,50 @@ function buscar(event) {
                         <td>${libro.cantidad}</td>
                     </tr>
                 `;
-                tbody.innerHTML += fila;// Añade cada fila a la tabla
+                tbody.innerHTML += fila;
             });
         }
-    })
-    .catch(error => {
+    } catch (error) {
         // Maneja cualquier error que ocurra durante la solicitud
-        console.error('Error al buscar:', error);
-    });
+        console.error('🚨 Error al cargar los libros:', error)
+        alert(`Ocurrió un error: ${error.message}`)
+    };
 }
+// Función que maneja el evento de búsqueda
+document.getElementById('form-busqueda').addEventListener('submit', async (event)=>{
+    // Evita que se recargue la página al enviar el formulario
+    event.preventDefault();
+    
+    const termino = document.getElementById('busqueda').value.trim();
+    try{
+        const response = await fetch(`/SistemaBiblioteca/index.php?action=buscar&q=${encodeURIComponent(termino)}`);
+        if (!response.ok) {
+            throw new Error('Error en la búsqueda');
+        }
+        const resultados = await response.json();
+
+        const tbody = document.querySelector('#tablaLibros tbody');
+        tbody.innerHTML = ''; // Limpia la tabla antes de insertar nuevos resultados
+        if (resultados.length === 0) {
+            // Si no se encontraron resultados, muestra un mensaje
+            tbody.innerHTML = '<tr><td colspan="3">No se encontraron resultados</td></tr>';
+        } else {
+            // Si hay resultados, los agrega a la tabla
+            resultados.forEach(libro => {
+                const fila = `
+                    <tr>
+                        <td>${libro.titulo}</td>
+                        <td>${libro.autor}</td>
+                        <td>${libro.cantidad}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += fila;
+            });
+        }
+    }catch(error) {
+        // Maneja cualquier error que ocurra durante la solicitud
+        console.error('🚨 Error al buscar:', error);
+        alert(`Ocurrió un error: ${error.message}`);
+    };
+
+})

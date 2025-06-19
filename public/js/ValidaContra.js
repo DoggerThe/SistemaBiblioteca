@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             formData.append('action', 'login');// Indica que la acción es iniciar sesión
 
-            const response = await fetch('/SistemaBiblioteca/public/action.php', {
+            const response = await fetch('/SistemaBiblioteca/index.php', {
                 method: 'POST',
                 body: formData
             });

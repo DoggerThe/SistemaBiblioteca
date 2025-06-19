@@ -5,8 +5,8 @@ class Libro {
     // Atributo privado que almacenará la conexión a la base de datos
     private $db;
     // Constructor: inicializa la conexión a la base de datos usando una clase externa 'database'
-    public function __construct() {
-        $this->db = (new database())->connect();
+    public function __construct($db) {
+        $this->db = $db;
     }
 
     /**
@@ -16,14 +16,25 @@ class Libro {
      * Un arreglo asociativo con los libros que coincidan con el término.
      */
     public function buscarLibros(string $termino): array {
-        $sql = "SELECT titulo, autor, cantidad FROM libros 
-                WHERE titulo LIKE :termino OR autor LIKE :termino OR genero LIKE :termino";
-        // Preparación y ejecución de la consulta con parámetros seguros (para evitar inyecciones SQL)
-        $stmt = $this->db->prepare($sql); // Se usa el comodín % para coincidencia parcial
-        $likeTermino = '%' . $termino . '%';
-        $stmt->bindValue(':termino', $likeTermino);
-        $stmt->execute();
-        // Se devuelve un arreglo con los resultados
+        if ($termino === '') {
+            $sql = "SELECT titulo, autor, cantidad FROM libros";
+            // Preparación y ejecución de la consulta con parámetros seguros (para evitar inyecciones SQL)
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        }
+        // Si el término de búsqueda está vacío, se retorna todos los libros
+        else {
+            $sql = "SELECT titulo, autor, cantidad FROM libros 
+                WHERE titulo LIKE :titulo OR autor LIKE :autor OR genero LIKE :genero";
+            // Preparación y ejecución de la consulta con parámetros seguros (para evitar inyecciones SQL)
+            $stmt = $this->db->prepare($sql); // Se usa el comodín % para coincidencia parcial
+            $likeTermino = '%' . $termino . '%';
+            $stmt->bindValue(':titulo', $likeTermino);
+            $stmt->bindValue(':autor', $likeTermino);
+            $stmt->bindValue(':genero', $likeTermino);
+            $stmt->execute();
+            // Se devuelve un arreglo con los resultados
+        }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     /**

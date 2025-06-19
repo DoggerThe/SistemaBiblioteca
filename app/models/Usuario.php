@@ -5,9 +5,9 @@ class Usuario {
     // Instancia de la base de datos
     private $db;
     // Constructor que crea una conexión con la base de datos
-    public function __construct() {
+    public function __construct($pdo) {
         // Creamos instancia de Database y pedimos la conexión
-        $this->db = (new database())->connect();
+        $this->db = $pdo;
     }
 
     /**

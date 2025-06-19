@@ -1,27 +1,33 @@
 <?php
 //Clase para la conexión a la base de datos
 class database {
-    private $host   = 'localhost';
-    private $dbName = 'biblioteca_mvc'; //Nombre de la base de datos
-    private $user   = 'root'; //Usuario de la base de datos
-    private $pass   = 'root'; //Depende de que se pusiera en la BD al crearla
-    private $pdo;
+    private static ?PDO $pdo = null; //Instancia estática de PDO
+    private function __construct(){
+    }
+
     // Método que devuelve la conexión PDO
-    public function connect() {
-        if ($this->pdo === null) {
-            $dsn = "mysql:host={$this->host};dbname={$this->dbName};charset=utf8mb4";
-            try {
-                $this->pdo = new PDO($dsn, $this->user, $this->pass);
-                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                // Aquí se pone un mensaje de error al usuario en caso de entrar.
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Error de conexión a la base de datos intentelo mas tarde.'
-                ]);
-                exit;
+    public static function getConexion(): ?PDO{   
+        $host   = 'localhost';
+        $dbName = 'biblioteca_mvc'; //Nombre de la base de datos
+        $user   = 'root'; //Usuario de la base de datos
+        $pass   = 'root'; //Depende de que se pusiera en la BD al crearla
+        $charset = 'utf8mb4'; //Codificación de caracteres
+        $opciones = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Modo de error
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Modo de obtención por defecto
+            PDO::ATTR_EMULATE_PREPARES   => false, // Desactivar emulación de sentencias preparadas
+        ];
+
+        try{
+            if (self::$pdo === null){
+                $dsn = "mysql:host={$host}; dbname={$dbName};charset={$charset}";
+                self::$pdo = new PDO($dsn, $user, $pass, $opciones);
             }
+            return self::$pdo;    
         }
-        return $this->pdo;
+        catch (PDOException $e) {
+            // Manejo de errores de conexión
+            return null; // Retorna null si hay un error
+        }
     }
 }

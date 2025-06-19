@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'logout':
             // Cierra la sesión del usuario
-            (new LoginController())->logout(); // Crearás este método
+            (new LoginController())->logout();
             break;
     }
     // Si no es ni POST ni GET, se considera un acceso inválido

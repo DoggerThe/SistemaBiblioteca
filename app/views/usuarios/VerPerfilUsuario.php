@@ -22,7 +22,7 @@ requireRole(1); // Solo permite el acceso a usuarios con rol 1 (usuarios normale
             <h1 class="welcome">"Leer, aprender, crecer - Todo en un solo lugar"</h1>
             <div class="button-group">
                 <!-- Botón para cerrar sesión -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
+                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>
             </div>
         </header>
         <!-- Línea separadora -->

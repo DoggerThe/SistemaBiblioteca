@@ -18,8 +18,8 @@
         </div>
         <div class="buttons">
             <!--Redireccion a Logearse o Registrarse-->
-            <button onclick="location.href='/SistemaBiblioteca/app/views/usuarios/login.php'">LOGIN</button>
-            <button onclick="location.href='/SistemaBiblioteca/app/views/usuarios/registerUser.php'">REGISTRO</button>
+            <button onclick="location.href='/SistemaBiblioteca/app/views/generales/login.php'">LOGIN</button>
+            <button onclick="location.href='/SistemaBiblioteca/app/views/generales/register.php'">REGISTRO</button>
         </div>
     </div>
 </body>

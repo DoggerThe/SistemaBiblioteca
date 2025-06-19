@@ -22,7 +22,7 @@ requireRole(2); // 2 es el rol de bibliotecario
 
             <div class="button-group">
                 <!-- Botón para cerrar sesión, redirige al script que maneja el logout -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/public/action.php?action=logout'">CERRAR SESIÓN</button>
+                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>//cambiado
                 <!-- Botón con ícono de usuario (actualmente sin funcionalidad) -->
                 <button class="image-button" onclick="location.href='#'">
                     <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">

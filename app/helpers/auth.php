@@ -3,7 +3,7 @@ session_start();
 
 // Verificar que el usuario esté logueado
 if (!isset($_SESSION['usuario'])) {
-    header('Location: /SistemaBiblioteca/app/views/usuarios/login.php');
+    header('Location: /SistemaBiblioteca/app/views/generales/lobby.php');
     exit;
 }
 
