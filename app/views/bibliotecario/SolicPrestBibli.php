@@ -9,40 +9,14 @@ requireRole(2); // 2 es el rol de bibliotecario
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecua Librería - Bibliotecario</title>
+    <link rel="stylesheet" href="/SistemaBiblioteca/public/css/InicioGeneral.css">
     <link rel="stylesheet" href="/SistemaBiblioteca/public/css/SolicPrestBibli.css">
 </head>
 
 <body>
     <div class="bibliotecario-container">
+        <?php include __DIR__.'/../layout/layoutBibliotecario.php';?>
 
-        <header class="header">
-            <!-- Mensaje de bienvenida con enlace a la página de inicio del bibliotecario -->
-            <h1 class="welcome"><a href="InicioBibliotec.php">Bienvenido Bibliotecario</a></h1>
-            <!-- Grupo de botones del lado derecho del encabezado -->
-            <div class="button-group">
-                <!-- Botón para cerrar sesión -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>
-                <!-- Botón con ícono de usuario (actualmente sin funcionalidad asignada) -->
-                <button class="image-button" onclick="location.href='#'">
-                    <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
-                </button>
-            </div>
-        </header>
-
-
-        <div class="separator"></div>
-
-        <!-- Barra lateral con navegación a distintas secciones para el bibliotecario -->
-        <aside class="sidebar">
-            <div class="menu-list">
-                <!-- Enlace a la vista de listado de libros -->
-                <button class="menu-button" onclick="location.href='ListadoLibrosBibli.php'">Libros</button>
-                <!-- Enlace a la vista actual: solicitudes de préstamo -->
-                <button class="menu-button" onclick="location.href='SolicPrestBibli.php'">Solicitudes de Préstamos</button>
-                <!-- Enlace al listado de todos los préstamos existentes -->
-                <button class="menu-button" onclick="location.href='ListadoPrestBibli.php'">Listado de Préstamos</button>
-            </div>
-        </aside>
         <!-- Contenedor general para la tabla de solicitudes -->
         <div class="container-General">
             <div class="Container-Tabla">
@@ -83,6 +57,7 @@ requireRole(2); // 2 es el rol de bibliotecario
             </div>
         </div>
         <script src="/SistemaBiblioteca/public/js/listarSolicitudes.js"></script>
+    </div>
 </body>
 
 </html>

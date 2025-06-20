@@ -9,38 +9,14 @@ requireRole(2); // 2 es el rol de bibliotecario
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecua Librería - Bibliotecario</title>
+  <link rel="stylesheet" href="/SistemaBiblioteca/public/css/InicioGeneral.css">
   <link rel="stylesheet" href="/SistemaBiblioteca/public/css/ListadoLibroBiblio.css">
 </head>
 
 <body>
   <div class="bibliotecario-container">
 
-    <header class="header">
-      <h1 class="welcome">
-      <!-- Enlace de regreso al panel principal del bibliotecario -->
-      <a href="InicioBibliotec.php">Bienvenido Bibliotecario</a></h1>
-      <div class="button-group">
-        <!-- Botón para cerrar sesión -->
-        <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button><!-- Cambiado -->
-        <!-- Botón con ícono de usuario (sin funcionalidad asignada aún) -->
-        <button class="image-button" onclick="location.href='#'">
-          <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
-        </button>
-      </div>
-    </header>
-
-    <div class="separator"></div>
-    <!-- Barra lateral de navegación con accesos a funcionalidades del sistema -->
-    <aside class="sidebar">
-      <div class="menu-list">
-        <!-- Botón para ver el listado de libros disponibles -->
-        <button class="menu-button" onclick="location.href='ListadoLibrosBibli.php'">Libros</button>
-        <!-- Botón para gestionar solicitudes de préstamos -->
-        <button class="menu-button" onclick="location.href='SolicPrestBibli.php'">Solicitudes de Préstamos</button>
-        <!-- Botón para revisar los préstamos ya realizados -->
-        <button class="menu-button" onclick="location.href='ListadoPrestBibli.php'">Listado de Préstamos</button>
-      </div>
-    </aside>
+    <?php include __DIR__.'/../layout/layoutBibliotecario.php';?>
     <!-- Tabla que mostrará la lista de libros recuperados desde la base de datos -->
     <div class="container-General">
       <div class="Container-barra">

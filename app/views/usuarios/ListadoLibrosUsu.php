@@ -9,35 +9,13 @@ requireRole(1); // 1 es el rol de usuario normal
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecua Librería</title>
-    <link rel="stylesheet" href="/SistemaBiblioteca/public/css/SolicPrestBibli.css">
+    <link rel="stylesheet" href="/SistemaBiblioteca/public/css/InicioGeneral.css">
+    <link rel="stylesheet" href="/SistemaBiblioteca/public/css/ListadoLibrosUsu.css">
 </head>
 
 <body>
     <div class="bibliotecario-container">
-        <!-- Encabezado principal del sistema con botones de navegación -->
-        <header class="header">
-            <!-- Enlace de bienvenida que redirige a la página de inicio del usuario -->
-            <h1 class="welcome"><a href="InicioUser.php">Bienvenido</a></h1>
-            <!-- Grupo de botones de acción del usuario: cerrar sesión y ver perfil -->
-            <div class="button-group">
-                <!-- Botón para cerrar sesión, redirige con un parámetro GET -->
-                <button class="logout-btn" onclick="location.href='/SistemaBiblioteca/index.php?action=logout'">CERRAR SESIÓN</button>
-                <!-- Botón con imagen de usuario, redirige a la vista del perfil -->
-                <button class="image-button" onclick="location.href='/SistemaBiblioteca/app/views/usuarios/VerPerfilUsuario.php'">
-                    <img src="/SistemaBiblioteca/public/img/user.png" alt="Login">
-                </button>
-            </div>
-        </header>
-        <!-- Línea divisoria visual entre el encabezado y el resto del contenido -->
-        <div class="separator"></div>
-
-        <!-- Barra lateral de navegación con enlaces a secciones principales del usuario -->
-        <aside class="sidebar">
-            <div class="menu-list">
-                <button class="menu-button" onclick="location.href='ListadoLibrosUsu.php'">Libros</button>
-                <button class="menu-button" onclick="location.href='ListadoPrestaUsu.php'">Prestamos</button>
-            </div>
-        </aside>
+        <?php include __DIR__."/../layout/layoutUsuario.php";?>
         <!-- Contenedor principal para la tabla de libros -->
         <div class="container-General">
             <div class="Container-Tabla">

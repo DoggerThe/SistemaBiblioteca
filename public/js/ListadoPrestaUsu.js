@@ -49,3 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function VerDetalles(btn) {
+    const fila = btn.closest("tr");
+    const celdas = fila.children;
+    // Muestra los datos del préstamo en el modal
+    document.getElementById("modalLibro").textContent = celdas[1].textContent;
+    document.getElementById("modalFechaInicio").textContent = celdas[2].textContent;
+    document.getElementById("modalFechaFin").textContent = celdas[3].textContent;
+    // Muestra el modal
+    document.getElementById("modal").style.display = "block";
+}
+/*
+ * Cierra el modal sin realizar ninguna acción.
+ */
+function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+}

@@ -1,0 +1,150 @@
+:root {
+  --base-font: 16px;
+  --spacing-unit: 1rem;
+  --color-primary: #4f3622;
+  --color-secondary: #8b5e3c;
+  --color-secondary-dark: #c0392b;
+  --color-maincontent: #d9cfc1;
+  --color-titulos-negritos: #000000;
+  --color-bg: #e7dfd5;
+  --color-white: #f8f5f2;
+  --color-sidebar: #ae9c82;
+  --color-border: #c2b6a9;
+  --color-hover: #a97142;
+  --shadow-light: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+  --color-boton-logout: #dc3545;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: #333;
+  font-size: var(--base-font);
+}
+
+/*--------------------ENCABEZADO-------------------------*/
+.header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5vw;
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow-light);
+  margin: 0;
+}
+.welcome {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: var(--color-white);
+  padding-left: 12rem;
+  font-family: "Poppins", sans-serif;
+}
+.welcome a {
+  text-decoration: none;
+  color: var(--color-white);
+}
+/*--CERRAR SESION BTN---*/
+.logout-btn {
+  padding: 0.5rem;
+  background-color: var(--color-boton-logout);
+  color: var(--color-white);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+  font-family: "Poppins", sans-serif;
+}
+.logout-btn:hover {
+  background-color: var(--color-secondary-dark);
+}
+/*-ICONO USUARIO-*/
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+.image-button img {
+  width: 32px;
+  height: auto;
+  border-radius: 1rem;
+}
+.image-button:hover img {
+  transform: scale(1.1);
+}
+/*-BOTONES AL LADO DE OTRO*/
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-right: 2rem;
+}
+
+.separator {
+  grid-area: separator;
+  height: 0.125rem;
+  background-color: var(--color-primary);
+  margin: 0;
+  padding: 0;
+}
+/*----------------MENU LATERAL------------------------------*/
+.sidebar {
+  grid-area: sidebar;
+  padding: 1.25rem;
+  background-color: var(--color-sidebar);
+  border-right: 1px solid var(--color-border);
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-button {
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  color: var(--color-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+
+.menu-button:hover {
+  background-color: #d7c7b7;
+  color: var(--color-hover);
+}
+
+/*---------------------CONTENIDO INTERNO--------------------*/
+
+.main-content {
+  grid-area: content;
+  /*padding: 0.1rem 1rem 1rem;*/
+  padding: 1rem;
+  background-color: var(--color-maincontent);
+}
+
+.bibliotecario-container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "separator separator"
+    "sidebar content";
+  grid-template-columns: minmax(12.5rem, 15.625rem) 1fr;
+  grid-template-rows: auto 0.125rem 1fr;
+  min-height: 100vh;
+}
