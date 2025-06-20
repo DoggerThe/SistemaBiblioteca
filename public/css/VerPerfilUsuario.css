@@ -1,5 +1,5 @@
-.Elementos-container{
-background-color: white;
+.Elementos-container {
+  background-color: white;
   width: 90%;
   max-width: 1000px;
   margin: 2rem auto; /* centra horizontalmente */
@@ -7,18 +7,18 @@ background-color: white;
   border-radius: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* sombra elegante */
 }
+
 .profile-header {
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin : 3rem;
+  margin: 3rem;
   margin-left: 10rem;
 }
 .profile-actions {
-   display: flex;
+  display: flex;
   justify-content: flex-start;
   margin-left: 250px; /* espacio manual, puedes cambiar el valor */
-
 }
 
 .change-password-btn {
@@ -26,10 +26,10 @@ background-color: white;
   font-family: "Poppins", sans-serif;
   border-radius: 2.5rem;
   width: 14rem;
-  height: 3rem ;
+  height: 3rem;
   color: white;
-   font-weight: bold; 
- font-size: 15px;
+  font-weight: bold;
+  font-size: 15px;
 }
 .profile-section-columns {
   display: flex;
@@ -49,18 +49,16 @@ background-color: white;
 }
 
 .change-password-btn:hover {
-    background-color: #1c3e91;
+  background-color: #1c3e91;
 }
-.profile-form{
+.profile-form {
   width: 100%; /* antes estaba en 1200px */
   max-width: 1200px;
-
 }
 .profile-section {
   margin: 0 auto;
   margin-left: 6rem;
   margin-top: 1.5rem;
-
 }
 
 .profile-field {
