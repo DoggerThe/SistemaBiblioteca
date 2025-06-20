@@ -1,0 +1,203 @@
+.main-content {
+    display: flex;
+
+}
+
+.columna-izquierda {
+    width: 30%;
+    background-color: #f8f1e9;
+    border-radius: 0.5rem;
+    height: 100%;
+    margin-right: 2%;
+}
+
+.columna-derecha {
+    width: 70%;
+    height: 100%;
+    background-color: #f8f1e9;
+    border-radius: 0.5rem;
+}
+.title-Ingreso {
+    text-align: center;
+    color: red;
+}
+
+.contenedor-formulario {
+    width: 65%;
+    background-color: #a3a1a1;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    height: 76%;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.5em;
+    border: 0.063em solid #ddd;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    transition: border-color 0.3s;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+select {
+    background-color: white;
+    color: #34495e;
+}
+.contrasena-container {
+  display: flex; /* Usamos flexbox para alinear los elementos en línea */
+  align-items: center; /* Asegura que el checkbox y el input estén alineados verticalmente */
+  gap: 10px; /* Espacio entre el input y el checkbox */
+}
+
+/* Estilo para el checkbox "Ver" */
+input[type="checkbox"] {
+  width: auto; /* El checkbox no se expandirá para ocupar todo el ancho */
+  margin-left: 0; /* El checkbox no tendrá margen extra */
+  vertical-align: middle; /* Alineación vertical con el texto */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el checkbox */
+}
+.boton-registro {
+    display: block;
+    margin: 0 auto;
+    padding: 0.625em 1.25em;
+    /* 10px 20px */
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    background-color: var(--color-secondary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-registro:hover {
+    background-color: var(--color-primary);
+}
+
+.barra-busqueda {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 1.5rem;
+}
+
+.barra-busqueda input {
+  box-sizing: border-box;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  outline: none;
+  width: 250px;
+  margin: 0; /* quita margen interno */
+  vertical-align: middle;
+}
+
+.barra-busqueda button {
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  margin-left: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.barra-busqueda button img {
+  width: 18px;
+  height: 18px;
+  display: block; 
+}
+
+.Container-Tabla {
+  background-color: #fff;
+  border-radius: 0.625rem; /* 10px ≈ 0.625rem */
+  max-width: 90%; /* 1000px relativo al contenedor */
+  margin: auto;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px sombra */
+
+  max-height: 68vh; /* 550px ≈ 75% de la altura del viewport */
+  overflow-y: auto;
+  overflow-x: auto; 
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 0.063rem solid #141313; /* 1px ≈ 0.063rem */
+}
+
+th,
+td {
+  padding: 0.75em; /* 12px ≈ 0.75em */
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+td {
+  background-color: var(--color-maincontent);
+  font-size: 0.95rem;
+}
+
+tr:hover {
+  background-color: var(--color-secondary);
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+thead {
+  margin: 0;
+  padding: 0;
+}
+
+/* Filas alternas */
+tr:nth-child(even) td {
+  background-color: #f0f0f0; /* Puedes ajustar al tono que combine con tu tema */
+}
