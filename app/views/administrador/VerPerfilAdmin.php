@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__.'/../../helpers/auth.php';
+requireRole(3);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -93,7 +97,7 @@
                 </div>
                 <!-- Variable de sesión con el ID del usuario para JS -->
                 <script>
-                    const idUsuario = <?php echo $_SESSION['usuario']['id']; ?>;
+                    const idUsuario = <?php echo $_SESSION['usuario']['id']?>;
                 </script>
             </div>
         </main>

@@ -18,9 +18,14 @@ class Usuario {
      */
     public function create(array $data): bool {
         // SQL para insertar un nuevo usuario
-        $sql = "INSERT INTO usuarios (cedula,nombre,apellido,email,direccion,password,rol_id)
-                VALUES (:cedula,:nombre,:apellido,:email,:direccion,:password,1)";
-                // Preparamos la sentencia SQL
+        if (isset($data['registrador']) && $data['registrador'] == 3){
+            $sql = "INSERT INTO usuarios (cedula,nombre,apellido,email,direccion,password,rol_id)
+                    VALUES (:cedula,:nombre,:apellido,:email,:direccion,:password,2)";
+        }else{
+            $sql = "INSERT INTO usuarios (cedula,nombre,apellido,email,direccion,password,rol_id)
+                    VALUES (:cedula,:nombre,:apellido,:email,:direccion,:password,1)";
+        }
+        // Preparamos la sentencia SQL
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':cedula'   => $data['cedula'],
@@ -48,6 +53,15 @@ class Usuario {
         return $stmt->fetchColumn() > 0;
     }
 
+    public function existEmail(string $email): bool {
+        // SQL para contar cuántos usuarios tienen la misma cédula
+        $sql = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
+        // Preparamos y ejecutamos la sentencia
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':email' => $email]);
+        // Retornamos si el conteo es mayor que 0 (es decir, existe la cédula)
+        return $stmt->fetchColumn() > 0;
+    }
     /**
      * Valida las credenciales de un usuario utilizando su cédula y contraseña.
      * $usuario Cédula del usuario.
@@ -133,5 +147,20 @@ class Usuario {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    
+
+    public function listaBibliotecarios(){
+        $sql = "SELECT nombre, apellido, cedula, email, direccion FROM usuarios WHERE rol_id = 2 ORDER BY cedula";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function busquedaBibliotecario($termino){
+        $ter = (string)$termino['busqueda'];
+        $sql = "SELECT nombre, apellido, cedula, email, direccion FROM usuarios WHERE rol_id = 2 AND cedula LIKE :cedula ORDER BY cedula";
+        $stmt = $this->db->prepare($sql);
+        $likeTermino = '%'.$ter.'%';
+        $stmt->bindParam(':cedula', $likeTermino);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -1,6 +1,5 @@
 cargarTablaLibros();
 
-
 async function cargarTablaLibros() {
     try {
         const response = await fetch('/SistemaBiblioteca/index.php?action=obtenerLibros');
@@ -67,7 +66,6 @@ document.getElementById('form-busqueda').addEventListener('submit', async (event
     }catch(error) {
         // Maneja cualquier error que ocurra durante la solicitud
         console.error('🚨 Error al buscar:', error);
-        alert(`Ocurrió un error: ${error.message}`);
     };
 
 })

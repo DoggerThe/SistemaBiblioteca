@@ -14,38 +14,76 @@ class UserController {
      * $post Datos enviados desde el formulario de registro.
      */
     public function register(array $post) {
-        // 1. Validar que no estén vacíos
+        // 1. Validar que no estén vacíos en caso de no ser admin
         foreach (['cedula','nombre','apellido','email','direccion','password'] as $field) {
             if (empty($post[$field])) {
                 // Almacena mensaje de error y redirige al formulario
-                $_SESSION['error'] = "El campo $field es obligatorio.";
-                header('Location: /SistemaBiblioteca/app/views/generales/register.php');
-                exit;
+                if( isset($post['registrador']) && (int)$post['registrador'] === 3){
+                    echo json_encode(['success' => false, 'message' => "Falto {$field}"]);
+                    return;
+                }else{
+                    $_SESSION['error'] = "El campo $field es obligatorio.";
+                    header('Location: /SistemaBiblioteca/app/views/generales/register.php');
+                    exit;
+                }
             }
         }
         // 2. Evitar duplicados
         if ($this->model->existsCedula($post['cedula'])) {
-            $_SESSION['error'] = "La cédula ya existe.";
-            // Almacena datos antiguos para repoblar el formulario
-            $_SESSION['old'] = [
-                'cedula' => $post['cedula'],
-                'nombre' => $post['nombre'],
-                'apellido' => $post['apellido'],
-                'email' => $post['email'],
-                'direccion' => $post['direccion'],
-            ];
-            header('Location: /SistemaBiblioteca/app/views/generales/register.php');
-            exit;
+            if(isset($post['registrador']) && (int)$post['registrador'] === 3){
+                echo json_encode(['success' => false, 'message' => 'La cedula ya existe']);
+                return;
+            }else{
+                $_SESSION['error'] = "La cédula ya existe.";
+                // Almacena datos antiguos para repoblar el formulario
+                $_SESSION['old'] = [
+                    'cedula' => $post['cedula'],
+                    'nombre' => $post['nombre'],
+                    'apellido' => $post['apellido'],
+                    'email' => $post['email'],
+                    'direccion' => $post['direccion'],
+                ];
+                header('Location: /SistemaBiblioteca/app/views/generales/register.php');
+                exit;
+            }
+        }
+        if($this->model->existEmail($post['email'])){
+            if(isset($post['registrador']) && (int)$post['registrador'] === 3){
+                echo json_encode(['success' => false, 'message' => 'El e-mail ya esta registrado']);
+                return;
+            }else{
+                $_SESSION['error'] = "Use otro E-mail.";
+                // Almacena datos antiguos para repoblar el formulario
+                $_SESSION['old'] = [
+                    'cedula' => $post['cedula'],
+                    'nombre' => $post['nombre'],
+                    'apellido' => $post['apellido'],
+                    'email' => $post['email'],
+                    'direccion' => $post['direccion'],
+                ];
+                header('Location: /SistemaBiblioteca/app/views/generales/register.php');
+                exit;
+            }
         }
         // 3. Intentar crear
         if ($this->model->create($post)) {
-            $_SESSION['success'] = "Usuario registrado exitosamente.";
-            header('Location: /SistemaBiblioteca/app/views/generales/login.php');
-            exit;
-        } else {
-            $_SESSION['error'] = "Error al registrar.";
-            header('Location: /SistemaBiblioteca/app/views/generales/register.php');
-            exit;
+            if(isset($post['registrador']) && (int)$post['registrador'] === 3){
+                echo json_encode(['success' => true, 'message' => 'Bibliotecario registrado correctamente']);
+                return;
+            }else{
+                $_SESSION['success'] = "Usuario registrado exitosamente.";
+                header('Location: /SistemaBiblioteca/app/views/generales/login.php');
+                exit;
+            }
+        }else {
+            if(isset($post['registrador']) && (int)$post['registrador'] === 3){
+                echo json_encode(['success' => false, 'message' => 'Error al registrar']);
+                return;
+            }else{
+                $_SESSION['error'] = "Error al registrar.";
+                header('Location: /SistemaBiblioteca/app/views/generales/register.php');
+                exit;
+            }
         }
     }
     /**
@@ -86,5 +124,15 @@ class UserController {
         } else {
             echo json_encode(['success' => false, 'message' => 'Error al actualizar la contraseña.']);
         }
+    }
+    public function listaBibliotecarios (){
+        header('Content-Type: application/json');
+        $resultados = $this->model->listaBibliotecarios();
+        echo json_encode($resultados);
+    }
+    public function busquedaBibliotecario($post){
+        header('Content-Type: application/json');
+        $resultados = $this->model->busquedaBibliotecario($post);
+        echo json_encode($resultados);
     }
 }

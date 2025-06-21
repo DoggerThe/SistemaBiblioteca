@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Realiza una solicitud POST al backend para obtener los libros prestados por el usuario.
     const datos = new URLSearchParams();
     datos.append("action", "listarLibrosPrestaUsu");
-    datos.append("usuario_id",idUsuario)
+    datos.append("usuario_id",idUsuario);
 
     fetch('/SistemaBiblioteca/index.php?action=listarLibrosPrestaUsu', {
         method: 'POST',

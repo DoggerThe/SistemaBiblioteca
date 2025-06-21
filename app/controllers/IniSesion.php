@@ -40,6 +40,8 @@ class LoginController
                 echo json_encode(['success' => true, 'redirect' => '/SistemaBiblioteca/app/views/usuarios/InicioUser.php']);
             } elseif ($usuario['rol_id'] == 2) { // Bibliotecario
                 echo json_encode(['success' => true, 'redirect' => '/SistemaBiblioteca/app/views/bibliotecario/InicioBibliotec.php']);
+            } elseif ($usuario['rol_id'] == 3) { // Administrador
+                echo json_encode(['success' => true, 'redirect' => '/SistemaBiblioteca/app/views/administrador/InicioAdministrador.php']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Rol no reconocido.']);// Rol no reconocido
             }

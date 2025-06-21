@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__.'/../../helpers/auth.php';
+requireRole(3);
+?>
 <!DOCTYPE html>
 <html lang="es">
 

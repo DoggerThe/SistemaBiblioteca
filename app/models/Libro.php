@@ -54,4 +54,46 @@ class Libro {
         // Devuelve los libros disponibles en orden alfabético por título
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function registrarLibros($post):bool{
+        if((int)$post["rol"] === 3 ){
+            $conn = $this->db;
+            $sql = "INSERT INTO libros (titulo,autor,isbn,genero,editorial,cantidad)
+                    VALUES (:titulo,:autor,:isbn,:genero,:editorial,:cantidad)";
+            $stmt = $conn->prepare($sql);
+            return $stmt->execute([
+                ':titulo' => $post["titulo"] ,
+                ':autor' => $post["autor"],
+                ':isbn' => $post["isbn"],
+                ':genero' => $post["genero"],
+                ':editorial' => $post["editorial"],
+                ':cantidad' => $post["cantidad"],
+            ]);
+        }
+        return false;
+    }
+    public function listarLibrosAdmin(){
+        $conn = $this->db;
+        $stmt = $conn->prepare("SELECT titulo, autor, genero, editorial, SUM(cantidad) AS total_cantidad
+                                FROM libros
+                                GROUP BY titulo, autor, genero, editorial
+                                ORDER BY titulo DESC;");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function buscarLibrosAdmin(string $termino):array{
+        $conn = $this->db;
+        $sql = "SELECT titulo, autor, genero, editorial, SUM(cantidad) AS total_cantidad
+                FROM libros
+                WHERE titulo LIKE :titulo OR autor LIKE :autor OR genero LIKE :genero OR editorial LIKE :editorial
+                GROUP BY titulo, autor, genero, editorial
+                ORDER BY titulo DESC;";
+        $stmt = $conn->prepare($sql);
+        $likeTermino = '%' . $termino . '%';
+        $stmt->bindValue(':titulo', $likeTermino);
+        $stmt->bindValue(':autor', $likeTermino);
+        $stmt->bindValue(':genero', $likeTermino);
+        $stmt->bindValue(':editorial', $likeTermino);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

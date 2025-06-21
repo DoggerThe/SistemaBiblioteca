@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__.'/../../helpers/auth.php';
+requireRole(3);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,7 +25,7 @@
             <div class="columna-izquierda">
                 <h2 class="title-Ingreso">Ingresar Nuevo Libro</h2>
                 <div class="contenedor-formulario">
-                    <form action="/php/ProcesarIngresoLibro.php" method="POST">
+                    <form id="FormularioInscripcion">
                         <div class="grupo-Libro">
                             <label for="isbn">ISBN:</label>
                             <input type="text" id="isbn" name="isbn" placeholder="978-0140442892" required>
@@ -48,7 +52,7 @@
 
                         <div class="form-group">
                             <label for="editorial">Editorial:</label>
-                            <input type="text" id="editorial" name="editorial" placeholder="Istoría" required>
+                            <input type="text" id="editorial" name="editorial" placeholder="Historia" required>
                         </div>
 
                         <button type="submit" class="btn_guardar">Guardar Libro</button>
@@ -58,7 +62,7 @@
 
             <div class="columna-derecha">
                 <h2 class="title-Ingreso">Lista de libros</h2>
-                <form class="barra-busqueda" onsubmit="buscar(event)">
+                <form class="barra-busqueda" id="form-busqueda">
                     <input type="text" id="busqueda" placeholder="Buscar...">
                     <button type="submit" class="buton-busqueda">🔍</button>
                 </form>
@@ -74,159 +78,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Don Quijote de la Mancha</td>
-                                <td>Miguel de Cervantes</td>
-                                <td>Novela</td>
-                                <td>Cátedra</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Vintage Español</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>Sapiens</td>
-                                <td>Yuval Noah Harari</td>
-                                <td>Historia</td>
-                                <td>Harper</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Debolsillo</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>To Kill a Mockingbird</td>
-                                <td>Harper Lee</td>
-                                <td>Ficción</td>
-                                <td>Harper Perennial</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Don Quijote de la Mancha</td>
-                                <td>Miguel de Cervantes</td>
-                                <td>Novela</td>
-                                <td>Cátedra</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Vintage Español</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>Sapiens</td>
-                                <td>Yuval Noah Harari</td>
-                                <td>Historia</td>
-                                <td>Harper</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Debolsillo</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>To Kill a Mockingbird</td>
-                                <td>Harper Lee</td>
-                                <td>Ficción</td>
-                                <td>Harper Perennial</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Don Quijote de la Mancha</td>
-                                <td>Miguel de Cervantes</td>
-                                <td>Novela</td>
-                                <td>Cátedra</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Vintage Español</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>Sapiens</td>
-                                <td>Yuval Noah Harari</td>
-                                <td>Historia</td>
-                                <td>Harper</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>La Odisea</td>
-                                <td>Homero</td>
-                                <td>Épico</td>
-                                <td>Penguin Classics</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Cien años de soledad</td>
-                                <td>Gabriel García Márquez</td>
-                                <td>Realismo mágico</td>
-                                <td>Debolsillo</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>To Kill a Mockingbird</td>
-                                <td>Harper Lee</td>
-                                <td>Ficción</td>
-                                <td>Harper Perennial</td>
-                                <td>15</td>
-                            </tr>
+                            <!--Llenado de JS-->
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
+    <script>const Rol = 3</script>
+    <script src="/SistemaBiblioteca/public/js/RegistroListadoLibros.js"></script>
 </body>
 
 </html>

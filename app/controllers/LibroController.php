@@ -48,4 +48,26 @@ class LibroController
         $resultados = $this->model->listarLibrosDisponibles();
         echo json_encode($resultados); // Devuelve el listado de libros disponibles en formato JSON
     }
+
+    public function registrarLibros($post){
+        header('Content-Type: application/json');
+        $result = $this->model->registrarLibros($post);
+        echo json_encode($result);
+    }
+    public function listarLibrosAdmin(){
+        header ('Content-Type: application/json');
+        $result = $this->model->listarLibrosAdmin();
+        echo json_encode($result);
+    }
+    public function buscarLibrosAdmin(array $get){
+        header('Content-Type: application/json');
+        if (empty($get['q'])){
+            $this->listarLibrosAdmin(); // Llama al método obtenerLibros para devolver todos los libros
+            return;
+        }
+        $consulta = $get['q']; // Obtiene el término de búsqueda desde el parámetro 'q'
+        // Consulta al modelo los libros que coincidan con el término
+        $resultado = $this->model->buscarLibrosAdmin($consulta);
+        echo json_encode($resultado);
+    }
 }

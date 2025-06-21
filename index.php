@@ -42,6 +42,15 @@
                 // Lista los libros actualmente prestados a un usuario específico
                 (new PrestamoController($pdo))->listarLibrosUsuario($_POST);
                 break;
+            case 'registrarLibros':
+                (new LibroController($pdo))->registrarLibros($_POST);
+                break;
+            case 'listaBibliotecarios':
+                (new UserController($pdo))->listaBibliotecarios();
+                break;
+            case 'busquedaBibliotecario':
+                (new UserController($pdo))->busquedaBibliotecario($_POST);
+                break;
             default:
                 echo "Acción no reconocida en post: $action";
                 http_response_code(404);
@@ -86,6 +95,12 @@
             case 'logout': //check
                 // Cierra la sesión del usuario
                 (new LoginController($pdo))->logout($_GET);
+                break;
+            case 'listarLibrosAdmin':
+                (new LibroController($pdo))->listarLibrosAdmin();
+                break;
+            case 'buscarLibrosAdmin':
+                (new LibroController($pdo))->buscarLibrosAdmin($_GET);
                 break;
             default: //check
                 if (!isset($_SESSION['usuario'])){
