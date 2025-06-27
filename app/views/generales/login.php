@@ -24,7 +24,7 @@
                     <!-- Campo para ingresar la cédula del usuario -->
                     <div class="grupo-formulario">
                         <label for="usuario">Cédula</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Cédula" required>
+                        <input type="text" id="usuario" name="usuario" placeholder="Cédula" maxlength="10" minlength="10" required>
                     </div>
                     <!-- Campo de contraseña con opción para mostrarla u ocultarla -->
                     <div class="grupo-formulario">
