@@ -21,7 +21,7 @@ requireRole(1); // 1 es el rol de usuario normal
         <!-- Contenedor principal de contenido -->
         <div class="container-General">
             <div class="Container-Tabla">
-                <h1>Lista de prestamos</h1>
+                <h1>Lista de solicitudes de prestamos</h1>
                 <!-- Tabla donde se mostrará la información de los préstamos -->
                 <table id="tablaLibros">
                     <thead>
@@ -30,6 +30,7 @@ requireRole(1); // 1 es el rol de usuario normal
                             <th>Libro</th>
                             <th>Fecha de inicio</th>
                             <th>Fecha de fin</th>
+                            <th>Acciones</th><!-- Botones creados en js -->
                         </tr>
                     </thead>
                     <tbody>
@@ -38,10 +39,26 @@ requireRole(1); // 1 es el rol de usuario normal
                 </table>
             </div>
         </div>
+        <!-- Modal emergente para mostrar los detalles del préstamo seleccionado -->
+        <div id="modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <!-- Botón (X) para cerrar el modal -->
+                <span class="close" onclick="cerrarModal()">&times;</span>
+                <!-- Detalles informativos del préstamo -->
+                <h2>Detalles del Préstamo</h2>
+                <p><strong>Num Prestamo:</strong> <span id="modalNumPres"></span></p>
+                <p><strong>Libro:</strong> <span id="modalLibro"></span></p>
+                <p><strong>Fecha de Inicio:</strong> <span id="modalFechaInicio"></span></p>
+                <p><strong>Fecha de Fin:</strong> <span id="modalFechaFin"></span></p>
+                <!-- Botón para cerrar o confirmar la vista del modal -->
+                <button style="color: #000; background-color: rgba(255, 0, 0, 0.4);" onclick="cancelarSolicitud()">Cancelar solicitud</button>
+            </div>
+        </div>
+        <!-- Se pasa el id del usuario desde PHP al script JS -->
         <script>
             const idUsuario = <?php echo $_SESSION['usuario']['id']; ?>;
         </script>
-        <script src="/SistemaBiblioteca/public/js/ListadoPrestaUsu.js"></script>
+        <script src="/SistemaBiblioteca/public/js/ListadoSoliPrestaUsu.js"></script>
     </div>
 </body>
 

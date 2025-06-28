@@ -84,7 +84,7 @@ class PrestamoController
      */
     public function listarLibrosUsuario($post)
     {
-        $resultados = $this->model->listarLibrosPrestados($post['usuario_id']);
+        $resultados = $this->model->listarLibrosPrestados($post['usuario_id'], $post['tipo']);
         echo json_encode($resultados);
     }
 
@@ -96,6 +96,10 @@ class PrestamoController
     public function obtenerInactivos()
     {
         $resultados = $this->model->obtenerListaPrestamos("2");
+        echo json_encode($resultados);
+    }
+    public function cancelarSolicitudLibro($post){
+        $resultados = $this->model->cancelarSolicitudLibro($post);
         echo json_encode($resultados);
     }
 }

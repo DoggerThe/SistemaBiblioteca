@@ -15,5 +15,6 @@
         <button class="menu-button " onclick="location.href='ListadoLibrosUsu.php'">Libros</button>
         <!-- Botón para ver los préstamos del usuario -->
         <button class="menu-button " onclick="location.href='ListadoPrestaUsu.php'">Préstamos</button>
+        <button class="menu-button " onclick="location.href='ListadoSoliPrestaUsu.php'">Solicitudes</button>
     </div>
 </aside>

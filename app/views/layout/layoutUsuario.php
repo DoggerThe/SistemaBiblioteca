@@ -13,5 +13,6 @@
     <div class="menu-list">
         <button class="menu-button" onclick="location.href='ListadoLibrosUsu.php'">Libros</button>
         <button class="menu-button" onclick="location.href='ListadoPrestaUsu.php'">Préstamos</button>
+        <button class="menu-button " onclick="location.href='ListadoSoliPrestaUsu.php'">Solicitudes</button>
     </div>
 </aside>

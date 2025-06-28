@@ -52,7 +52,7 @@ async function cargar(tipo, action, Ntbody){
     }catch (error) {
         // Maneja cualquier error que ocurra durante la solicitud
         console.error('Error al cargar los préstamos activos:', error);
-        alert(`Ocurrió un error: ${error.message}`);
+        alert(`Ocurrió un error.`);
     }
 }
 document.getElementById('BusquedaActivos').addEventListener('submit', async (event)=>{

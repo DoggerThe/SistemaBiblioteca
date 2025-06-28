@@ -127,17 +127,30 @@ class Prestamo
         return $stmt->execute([$id_libro, $id_usuario, $fecha_solicitud, $fecha_inicio, $fecha_fin]);
     }
     // Lista los libros actualmente prestados a un usuario específico
-    public function listarLibrosPrestados($usuario_id)
+    public function listarLibrosPrestados($usuario_id, $tipo)
     {
         $conn = $this->db;
-        $stmt = $conn->prepare("
-            SELECT p.id AS id_prestamo, l.titulo AS titulo_libro, p.libro_id, p.fecha_solicitud, p.fecha_inicio, p.fecha_fin
-            FROM prestamos p
-            JOIN libros l ON p.libro_id = l.id
-            WHERE p.usuario_id = ? AND p.estado_id = 1
-            ORDER BY p.fecha_inicio DESC
-        ");
-        $stmt->execute([$usuario_id]);
+        $stmt = $conn->prepare("SELECT p.id AS id_prestamo, l.titulo AS titulo_libro, p.libro_id, p.id, p.fecha_solicitud, p.fecha_inicio, p.fecha_fin
+                                FROM prestamos p
+                                JOIN libros l ON p.libro_id = l.id
+                                WHERE p.usuario_id = :id AND p.estado_id = :estado
+                                ORDER BY p.fecha_inicio DESC");
+        $stmt->bindParam(':id', $usuario_id);
+        $stmt->bindParam(':estado', $tipo);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function cancelarSolicitudLibro($datos):bool{
+        try{
+            $conn = $this->db;
+            $sql = "UPDATE prestamos SET estado_id = 4
+                    WHERE usuario_id = :usuario_id AND id = :idPrestamo ";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':usuario_id', $datos['idUser']);
+            $stmt->bindParam(':idPrestamo', $datos['NumPrestamo']);
+            return $stmt->execute();
+        }catch(error){
+            return false;
+        }
     }
 }

@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const datos = new URLSearchParams();
     datos.append("action", "listarLibrosPrestaUsu");
     datos.append("usuario_id",idUsuario);
+    datos.append("tipo", 1);
 
-    fetch('/SistemaBiblioteca/index.php?action=listarLibrosPrestaUsu', {
+    fetch('/SistemaBiblioteca/index.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded' // Envia los datos
@@ -30,39 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 const tr = document.createElement("tr");
                 // Inserta los datos del libro en la fila de la tabla
                 tr.innerHTML = `
-                    <td>${Libro.libro_id}</td>
+                    <td>${Libro.id}</td>
                     <td>${Libro.titulo_libro}</td>
                     <td>${Libro.fecha_inicio}</td>
                     <td>${Libro.fecha_fin}</td>
-                    <td class="acciones">
-                        <button class="btn-confirmar" title="Confirmar">
-                            <i class="fas fa-check"></i> Ver Detalles
-                        </button>
-                    </td>
                 `;
-                // Selecciona el botón "Ver Detalles" y agrega un evento de click para mostrar detalles del libro
-                const btn = tr.querySelector(".btn-confirmar");
-                btn.addEventListener("click", () => VerDetalles(btn));
                 // Agrega la nueva fila a la tabla
                 tbody.appendChild(tr);
             });
         }
     });
 });
-
-function VerDetalles(btn) {
-    const fila = btn.closest("tr");
-    const celdas = fila.children;
-    // Muestra los datos del préstamo en el modal
-    document.getElementById("modalLibro").textContent = celdas[1].textContent;
-    document.getElementById("modalFechaInicio").textContent = celdas[2].textContent;
-    document.getElementById("modalFechaFin").textContent = celdas[3].textContent;
-    // Muestra el modal
-    document.getElementById("modal").style.display = "block";
-}
-/*
- * Cierra el modal sin realizar ninguna acción.
- */
-function cerrarModal() {
-    document.getElementById("modal").style.display = "none";
-}
