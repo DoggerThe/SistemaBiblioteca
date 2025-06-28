@@ -9,17 +9,19 @@ function cargarTablaActivos() {
     const tipo = 'activos';
     const action = 'obtenerActivos';
     const tbody = '#tablaLibroPres tbody';
+    const columnas = 7;
 
-    cargar(tipo, action, tbody);
+    cargar(tipo, action, tbody, columnas);
 };
 function cargarTablaInactivos() {
     const tipo = 'inactivos';
     const action = 'obtenerInactivos';
     const Ntbody = '#tablaLibroPres2 tbody';
+    const columnas = 6;
 
-    cargar(tipo, action, Ntbody);
+    cargar(tipo, action, Ntbody, columnas);
 };
-async function cargar(tipo, action, Ntbody){
+async function cargar(tipo, action, Ntbody, columnas){
     try{
         const response = await fetch(`/SistemaBiblioteca/index.php?action=${action}`);
         if (!response.ok) {
@@ -31,23 +33,47 @@ async function cargar(tipo, action, Ntbody){
         tbody.innerHTML = ''; // Limpia la tabla antes de insertar nuevos datos
         if (prestamos.length === 0) {
             // Si no hay préstamos activos, muestra un mensaje
-            tbody.innerHTML = `<tr><td colspan="7">No hay préstamos ${tipo}</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="${columnas}">No hay préstamos ${tipo}</td></tr>`;
         } else {
-            // Si hay préstamos activos, los agrega a la tabla
-            prestamos.forEach(p => {
-                const fila =`
-                    <tr>
-                        <td>${p.id_prestamo}</td>
-                        <td>${p.cedula_usuario}</td>
-                        <td>${p.titulo_libro}</td>
-                        <td>${p.fecha_solicitud}</td>
-                        <td>${p.fecha_inicio}</td>
-                        <td>${p.fecha_fin}</td>
-                        <td>${p.estado}</td>
-                    </tr>
-                `;
-                tbody.innerHTML += fila;
-            });
+            if(tipo == "activos"){
+                prestamos.forEach(p => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML=`
+                            <td>${p.id_prestamo}</td>
+                            <td>${p.cedula_usuario}</td>
+                            <td>${p.titulo_libro}</td>
+                            <td>${p.fecha_solicitud}</td>
+                            <td>${p.fecha_inicio}</td>
+                            <td>${p.fecha_fin}</td>
+                            <td></td>
+                    `;
+                    const celdaAccion = tr.querySelector("td:last-child");
+                    const boton = document.createElement("button");
+                    boton.textContent = "Devolver";
+                    boton.className = "btn";
+                    boton.onclick = function(){
+                        marcarDevolucion(p);
+                    };
+                    celdaAccion.appendChild(boton);
+
+                    tbody.appendChild(tr);
+                });
+            }else{
+                tbody.innerHTML="";
+                prestamos.forEach(p => {
+                    const fila =`
+                        <tr>
+                            <td>${p.id_prestamo}</td>
+                            <td>${p.cedula_usuario}</td>
+                            <td>${p.titulo_libro}</td>
+                            <td>${p.fecha_solicitud}</td>
+                            <td>${p.fecha_inicio}</td>
+                            <td>${p.fecha_fin}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += fila;
+                });
+            }
         }
     }catch (error) {
         // Maneja cualquier error que ocurra durante la solicitud
@@ -78,18 +104,26 @@ document.getElementById('BusquedaActivos').addEventListener('submit', async (eve
         } else {
             // Si hay resultados, los agrega a la tabla
             resultados.forEach(p => {
-                const fila = `
-                    <tr>
+                const tr = document.createElement("tr");
+                tr.innerHTML=`
                         <td>${p.id_prestamo}</td>
                         <td>${p.cedula_usuario}</td>
                         <td>${p.titulo_libro}</td>
                         <td>${p.fecha_solicitud}</td>
                         <td>${p.fecha_inicio}</td>
                         <td>${p.fecha_fin}</td>
-                        <td>${p.estado}</td>
-                    </tr>
+                        <td></td>
                 `;
-                tbody.innerHTML += fila;
+                const celdaAccion = tr.querySelector("td:last-child");
+                const boton = document.createElement("button");
+                boton.textContent = "Devolver";
+                boton.className = "btn";
+                boton.onclick = function(){
+                    marcarDevolucion(p);
+                };
+                celdaAccion.appendChild(boton);
+
+                tbody.appendChild(tr);
             });
         }
     } catch (error) {
@@ -117,7 +151,7 @@ document.getElementById('BusquedaInactivos').addEventListener('submit', async (e
         tbody.innerHTML = ''; // Limpia la tabla antes de insertar nuevos resultados
         if (resultados.length === 0) {
             // Si no se encontraron resultados, muestra un mensaje
-            tbody.innerHTML = '<tr><td colspan="7">No se encontraron resultados</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6">No se encontraron resultados</td></tr>';
         } else {
             // Si hay resultados, los agrega a la tabla
             resultados.forEach(p => {
@@ -129,7 +163,6 @@ document.getElementById('BusquedaInactivos').addEventListener('submit', async (e
                         <td>${p.fecha_solicitud}</td>
                         <td>${p.fecha_inicio}</td>
                         <td>${p.fecha_fin}</td>
-                        <td>${p.estado}</td>
                     </tr>
                 `;
                 tbody.innerHTML += fila;
@@ -139,3 +172,34 @@ document.getElementById('BusquedaInactivos').addEventListener('submit', async (e
         console.error('Error al buscar préstamos inactivos:', error);
     }
 })
+async function marcarDevolucion(prestamo){
+    if(confirm("Seguro que desea marcar como devuelto el prestamo: " + prestamo.id_prestamo)){
+        try{
+            const datos = new URLSearchParams();
+            datos.append("action", "marcarDevolucion");
+            datos.append("idPrestamo", prestamo.id_prestamo);
+            datos.append("idUsuario", prestamo.usuario_id);
+            datos.append("idLibro", prestamo.libro_id)
+            const respon = await fetch('/SistemaBiblioteca/index.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: datos.toString()
+            })
+            const resol = await respon.json();
+            if (resol){
+                alert ("Prestamo marcado como devuelto.");
+                location.reload();
+            }else{
+                alert ("No se pudo continuar con la solicitud.");
+            }
+        }catch(error){
+            console.error('Error en la búsqueda:', error);
+            alert('Error al tratar de cambiar el estado');
+        }
+    }else{
+        alert ("Cancelado.")
+        location.reload();
+    }
+}

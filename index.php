@@ -57,6 +57,9 @@
             case 'cancelarSolicitudLibro':
                 (new PrestamoController($pdo))->cancelarSolicitudLibro($_POST);
                 break;
+            case 'marcarDevolucion':
+                (new PrestamoController($pdo))->marcarDevolucion($_POST);
+                break;
             default:
                 echo "Acción no reconocida en post: $action";
                 http_response_code(404);

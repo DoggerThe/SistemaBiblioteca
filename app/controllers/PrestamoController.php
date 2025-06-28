@@ -102,4 +102,9 @@ class PrestamoController
         $resultados = $this->model->cancelarSolicitudLibro($post);
         echo json_encode($resultados);
     }
+    public function marcarDevolucion($post){
+        header('Content-Type: application/json');
+        $resultados = $this->model->marcarDevolucion($post);
+        echo json_encode($resultados);
+    }
 }

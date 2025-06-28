@@ -11,17 +11,15 @@ class Prestamo
     }
     public function obtenerListaPrestamos($estado){
         $conn = $this->db;
-        $stmt = $conn->prepare("
-            SELECT p.id AS id_prestamo, u.cedula AS cedula_usuario, l.titulo AS titulo_libro,
-                   p.fecha_solicitud, p.fecha_inicio, p.fecha_fin, e.nombre AS estado
-            FROM prestamos p
-            JOIN usuarios u ON p.usuario_id = u.id
-            JOIN libros l ON p.libro_id = l.id
-            JOIN estados_prestamo e ON p.estado_id = e.id
-            WHERE p.estado_id = ?
-            ORDER BY p.id DESC
-            LIMIT 10
-        ");
+        $stmt = $conn->prepare("SELECT p.id AS id_prestamo, u.cedula AS cedula_usuario, l.titulo AS titulo_libro,
+                                    p.fecha_solicitud, p.fecha_inicio,p.libro_id, p.fecha_fin, p.usuario_id, e.nombre AS estado
+                                FROM prestamos p
+                                JOIN usuarios u ON p.usuario_id = u.id
+                                JOIN libros l ON p.libro_id = l.id
+                                JOIN estados_prestamo e ON p.estado_id = e.id
+                                WHERE p.estado_id = ?
+                                ORDER BY p.id DESC
+                                LIMIT 10");
         $stmt->execute([$estado]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -31,17 +29,15 @@ class Prestamo
     {
         $conn = $this->db;
         $like = '%' . $termino . '%';
-        $stmt = $conn->prepare("
-            SELECT p.id AS id_prestamo, u.cedula AS cedula_usuario, l.titulo AS titulo_libro,
-                   p.fecha_solicitud, p.fecha_inicio, p.fecha_fin, e.nombre AS estado
-            FROM prestamos p
-            JOIN usuarios u ON p.usuario_id = u.id
-            JOIN libros l ON p.libro_id = l.id
-            JOIN estados_prestamo e ON p.estado_id = e.id
-            WHERE p.estado_id = 1 AND u.cedula LIKE ?
-            ORDER BY p.id DESC
-            LIMIT 10
-        ");
+        $stmt = $conn->prepare("SELECT p.id AS id_prestamo, u.cedula AS cedula_usuario, l.titulo AS titulo_libro,
+                                    p.fecha_solicitud, p.fecha_inicio, p.libro_id, p.fecha_fin, p.usuario_id, e.nombre AS estado
+                                FROM prestamos p
+                                JOIN usuarios u ON p.usuario_id = u.id
+                                JOIN libros l ON p.libro_id = l.id
+                                JOIN estados_prestamo e ON p.estado_id = e.id
+                                WHERE p.estado_id = 1 AND u.cedula LIKE ?
+                                ORDER BY p.id DESC
+                                LIMIT 10");
         $stmt->execute([$like]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -149,6 +145,25 @@ class Prestamo
             $stmt->bindParam(':usuario_id', $datos['idUser']);
             $stmt->bindParam(':idPrestamo', $datos['NumPrestamo']);
             return $stmt->execute();
+        }catch(error){
+            return false;
+        }
+    }
+    public function marcarDevolucion($datos):bool{
+        try{
+            $conn = $this->db;
+            $sql = "UPDATE prestamos SET estado_id = 2
+                    WHERE usuario_id = :usuario_id AND id = :idPrestamo ";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':usuario_id', $datos['idUsuario']);
+            $stmt->bindParam(':idPrestamo', $datos['idPrestamo']);
+            $primer = $stmt->execute();
+            if($primer){
+                $stmt = $conn->prepare("UPDATE libros SET cantidad = cantidad + 1 WHERE id = :id");
+                $stmt->bindParam(':id', $datos['idLibro']);
+                return $stmt->execute();
+            }
+            return ($primer);
         }catch(error){
             return false;
         }
