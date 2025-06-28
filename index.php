@@ -51,6 +51,9 @@
             case 'busquedaBibliotecario':
                 (new UserController($pdo))->busquedaBibliotecario($_POST);
                 break;
+            case 'cambiarDatosLibroAdmin':
+                (new LibroController($pdo))->cambiarDatosLibroAdmin($_POST);
+                break;
             default:
                 echo "Acción no reconocida en post: $action";
                 http_response_code(404);
@@ -101,6 +104,9 @@
                 break;
             case 'buscarLibrosAdmin':
                 (new LibroController($pdo))->buscarLibrosAdmin($_GET);
+                break;
+            case 'rellenoExistBibli':
+                (new LibroController($pdo))->rellenoExistBibli($_GET);
                 break;
             default: //check
                 if (!isset($_SESSION['usuario'])){

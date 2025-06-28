@@ -51,7 +51,7 @@ async function cargar(tipo, action, Ntbody){
         }
     }catch (error) {
         // Maneja cualquier error que ocurra durante la solicitud
-        console.error('🚨 Error al cargar los préstamos activos:', error);
+        console.error('Error al cargar los préstamos activos:', error);
         alert(`Ocurrió un error: ${error.message}`);
     }
 }
@@ -93,7 +93,7 @@ document.getElementById('BusquedaActivos').addEventListener('submit', async (eve
             });
         }
     } catch (error) {
-        console.error('🚨 Error al buscar préstamos activos:', error);
+        console.error('Error al buscar préstamos activos:', error);
         alert(`Ocurrió un error: ${error.message}`);
     }
 })
@@ -136,7 +136,6 @@ document.getElementById('BusquedaInactivos').addEventListener('submit', async (e
             });
         }
     } catch (error) {
-        console.error('🚨 Error al buscar préstamos inactivos:', error);
-        alert(`Ocurrió un error: ${error.message}`);
+        console.error('Error al buscar préstamos inactivos:', error);
     }
 })

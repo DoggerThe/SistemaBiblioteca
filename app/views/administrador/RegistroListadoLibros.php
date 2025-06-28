@@ -11,9 +11,8 @@ requireRole(3);
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/SistemaBiblioteca/public/css/InicioGeneral.css">
     <link rel="stylesheet" href="/SistemaBiblioteca/public/css/IngresoListadoAdmin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <title>Ecua Librería - Administrador</title>
-
-
 </head>
 
 <body>
@@ -70,17 +69,52 @@ requireRole(3);
                     <table id="tablaLibros">
                         <thead>
                             <tr>
+                                <th>ISBN</th>
                                 <th>Titulo</th>
                                 <th>Autor</th>
                                 <th>Genero</th>
                                 <th>Editorial</th>
                                 <th>Cantidad</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--Llenado de JS-->
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div id="modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="cerrarModal()">&times;</span>
+                    <h2>Datos del libro</h2>
+                    <div class="modal-field">
+                        <label for="ISBN_M">ISBN</label>
+                        <input type="text" id="ISBN_M" disabled>
+                    </div>
+                    <div class="modal-field">
+                        <label for="Titulo_M">Titulo</label>
+                        <input type="text" id="Titulo_M">
+                    </div>
+                    <div class="modal-field">
+                        <label for="Autor_M">Autor</label>
+                        <input type="text" id="Autor_M">
+                    </div>
+                    <div class="modal-field">
+                        <label for="Genero_M">Genero</label>
+                        <input type="text" id="Genero_M">
+                    </div>
+                    <div class="modal-field">
+                        <label for="Editorial_M">Editorial</label>
+                        <input type="text" id="Editorial_M">
+                    </div>
+                    <div class="modal-field">
+                        <label for="Cantidad_M">Cantidad</label>
+                        <input type="text" id="Cantidad_M" disabled>
+                    </div>
+                    <div class="modal-actions">
+                        <button onclick="confirmarCambio()">Confirmar Cambio</button>
+                    </div>
                 </div>
             </div>
         </main>

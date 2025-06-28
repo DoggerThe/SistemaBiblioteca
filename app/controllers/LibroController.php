@@ -51,8 +51,14 @@ class LibroController
 
     public function registrarLibros($post){
         header('Content-Type: application/json');
-        $result = $this->model->registrarLibros($post);
-        echo json_encode($result);
+        $res = $this->model->revisarISBN($post);
+        if($res){
+            $result = $this->model->actalizarLibros($post);
+            echo json_encode($result);
+        }else{
+            $result = $this->model->registrarLibros($post);
+            echo json_encode($result);
+        }
     }
     public function listarLibrosAdmin(){
         header ('Content-Type: application/json');
@@ -68,6 +74,21 @@ class LibroController
         $consulta = $get['q']; // Obtiene el término de búsqueda desde el parámetro 'q'
         // Consulta al modelo los libros que coincidan con el término
         $resultado = $this->model->buscarLibrosAdmin($consulta);
+        echo json_encode($resultado);
+    }
+    public function cambiarDatosLibroAdmin($post){
+        header ('Content-Type: application/json');
+        $result = $this->model->cambiarDatosLibroAdmin($post);
+        echo json_encode($result);
+    }
+    public function rellenoExistBibli($get){
+        header ('Content-Type: application/json');
+        if (empty($get['q'])){
+            echo json_encode(false);
+            return;
+        }
+        $consulta = $get['q'];
+        $resultado = $this->model->rellenoExistBibli($consulta);
         echo json_encode($resultado);
     }
 }
