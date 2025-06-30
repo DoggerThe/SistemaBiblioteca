@@ -52,15 +52,6 @@ CREATE TABLE estados_prestamo(
 );
 
 -- 6. Insertamos datos iniciales
-INSERT INTO roles (nombre) VALUES ('usuario'), ('bibliotecario');
+INSERT INTO roles (nombre) VALUES ('usuario'), ('bibliotecario'), ('administrador');
 
-INSERT INTO usuarios (cedula, nombre, apellido, email, password, direccion, rol_id) VALUES
-('0102030405', 'Juan', 'Perez', 'juanperez@example.com', '123456', 'Av. Siempre Viva 123', 1),
-('0504030201', 'Maria', 'Lopez', 'marialopez@example.com', '654321', NULL, 2);
-
-INSERT INTO libros (titulo, autor, isbn, genero, editorial, cantidad) VALUES
-('Las 1001 noches', 'Anónimo', '978-0140442892', 'Fantasía', 'Penguin Classics', 10),
-('Cien años de soledad', 'Gabriel García Márquez', '978-0307474728', 'Realismo mágico', 'Vintage', 5);
-
-INSERT INTO prestamos (usuario_id, libro_id, fecha_solicitud, fecha_inicio, fecha_fin, estado) VALUES
-(1, 1, CURDATE(), NULL, NULL, 'activo');
+INSERT INTO  estados_prestamo(nombre) VALUES('activo'),('inactivo'),('pendiente'),('cancelado');
