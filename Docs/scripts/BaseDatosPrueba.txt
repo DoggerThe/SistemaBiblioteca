@@ -32,7 +32,13 @@ CREATE TABLE libros (
     cantidad INT DEFAULT 0
 );
 
--- 5. Tabla prestamos
+-- 5. Tabla Estado prestamo
+CREATE TABLE estados_prestamo(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- 6. Tabla prestamos
 CREATE TABLE prestamos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -45,13 +51,8 @@ CREATE TABLE prestamos (
     FOREIGN KEY (libro_id) REFERENCES libros(id),
     FOREIGN KEY (estado_id) REFERENCES estados_prestamo(id)
 );
---6. Tabla Estado prestamo
-CREATE TABLE estados_prestamo(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50)
-);
 
--- 6. Insertamos datos iniciales
+-- 7. Insertamos datos iniciales
 INSERT INTO roles (nombre) VALUES ('usuario'), ('bibliotecario'), ('administrador');
 
 INSERT INTO  estados_prestamo(nombre) VALUES('activo'),('inactivo'),('pendiente'),('cancelado');

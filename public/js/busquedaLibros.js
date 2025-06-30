@@ -28,7 +28,7 @@ async function cargarTablaLibros() {
         }
     } catch (error) {
         // Maneja cualquier error que ocurra durante la solicitud
-        console.error('🚨 Error al cargar los libros:', error)
+        console.error('Error al cargar los libros:', error)
         alert(`Ocurrió un error: ${error.message}`)
     };
 }
