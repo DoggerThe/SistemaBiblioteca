@@ -109,10 +109,10 @@ class Libro {
     }
     public function buscarLibrosAdmin(string $termino):array{
         $conn = $this->db;
-        $sql = "SELECT titulo, autor, genero, editorial, SUM(cantidad) AS total_cantidad
+        $sql = "SELECT isbn, titulo, autor, genero, editorial, SUM(cantidad) AS total_cantidad
                 FROM libros
-                WHERE titulo LIKE :titulo OR autor LIKE :autor OR genero LIKE :genero OR editorial LIKE :editorial
-                GROUP BY titulo, autor, genero, editorial
+                WHERE isbn LIKE :isbn OR titulo LIKE :titulo OR autor LIKE :autor OR genero LIKE :genero OR editorial LIKE :editorial
+                GROUP BY isbn, titulo, autor, genero, editorial
                 ORDER BY titulo DESC;";
         $stmt = $conn->prepare($sql);
         $likeTermino = '%' . $termino . '%';
@@ -120,6 +120,7 @@ class Libro {
         $stmt->bindValue(':autor', $likeTermino);
         $stmt->bindValue(':genero', $likeTermino);
         $stmt->bindValue(':editorial', $likeTermino);
+        $stmt->bindValue(':isbn', $likeTermino);
         $stmt->execute();
         return $stmt->fetchAll();
     }

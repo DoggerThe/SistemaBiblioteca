@@ -54,6 +54,7 @@ document.getElementById("FormularioNuevoBiblio").addEventListener('submit', asyn
         const resultados =await response.json();
         if(resultados.success){
             alert (resultados.message)
+            location.reload();
         }else{
             alert (resultados.message)
         }

@@ -27,7 +27,7 @@ requireRole(3);
                     <form id="FormularioInscripcion">
                         <div class="grupo-Libro">
                             <label for="isbn">ISBN:</label>
-                            <input type="text" id="isbn" name="isbn" placeholder="978-0140442892" required>
+                            <input type="text" id="isbn" name="isbn" placeholder="978-0140442892" maxlength="14" pattern="^\d{3}-\d{1,10}$" required>
                         </div>
 
                         <div class="grupo-Libro">

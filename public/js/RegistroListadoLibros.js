@@ -140,21 +140,32 @@ document.getElementById('form-busqueda').addEventListener('submit', async(event)
         tbody.innerHTML = '';
         if (resultados.length === 0){
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td colspan="5" class="text-center">No hay libros para mostrar.</td>`;
+            tr.innerHTML = `<td colspan="7" class="text-center">No hay libros para mostrar.</td>`;
             tbody.appendChild(tr);
             return;
         } else{
-            resultados.forEach(libro =>{
+            resultados.forEach(libro => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
+                    <td>${libro.isbn}</td>
                     <td>${libro.titulo}</td>
                     <td>${libro.autor}</td>
                     <td>${libro.genero}</td>
                     <td>${libro.editorial}</td>
                     <td>${libro.total_cantidad}</td>
+                    <td></td>
                 `;
+                const celdaAcciones = tr.querySelector("td:last-child");
+                const boton = document.createElement("button");
+                boton.textContent = "Ver detalles";
+                boton.className = "btn";
+                boton.onclick = function(){
+                    abrirModal(libro);
+                };
+                celdaAcciones.appendChild(boton);
+
                 tbody.appendChild(tr);
-            })
+            });
         }
     }catch(error){
         console.error('Error al buscar:', error);
