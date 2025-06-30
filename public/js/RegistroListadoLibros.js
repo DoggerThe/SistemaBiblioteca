@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         if (data.length === 0){
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td colspan="5" class="text-center">No hay libros para mostrar.</td>`;
+            tr.innerHTML = `<td colspan="7" class="text-center">No hay libros para mostrar.</td>`;
             tbody.appendChild(tr);
             return;
         }
