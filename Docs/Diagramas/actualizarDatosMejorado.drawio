@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="27.2.0">
+  <diagram name="Página-1" id="2G13D53YDvwlniD_TVjE">
+    <mxGraphModel dx="525" dy="611" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-47" value="Actualizar Datos de Libro Estado Mejorado" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=20;html=1;" vertex="1" parent="1">
+          <mxGeometry x="567" y="348" width="470" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-48" value="Administrador" style="swimlane;startSize=20;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-47">
+          <mxGeometry y="20" width="180" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-50" value="Accede al sistema con su cuenta" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="80" width="146" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-85" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-51" target="eEPZKazcpPrEw2ItmqRp-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-51" value="Busca el libro a modificar" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="130" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-52" value="Verifica que los datos estén correctos" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="450" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-53" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="67.5" y="510" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-56" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="67.5" y="30" width="25" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.408;entryY=0.031;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-52" target="eEPZKazcpPrEw2ItmqRp-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-84" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-74" target="eEPZKazcpPrEw2ItmqRp-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-74" value="Seleccionar &quot;Ver Detalles&quot;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="180" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-83" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-75" target="eEPZKazcpPrEw2ItmqRp-76">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-75" value="Modificar los campos necesarios" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="232" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-76" value="Guardar los cambios" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-48">
+          <mxGeometry x="10" y="280" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-86" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.52;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-50" target="eEPZKazcpPrEw2ItmqRp-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-87" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.477;entryY=0.019;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-48" source="eEPZKazcpPrEw2ItmqRp-56" target="eEPZKazcpPrEw2ItmqRp-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-59" value="SistemaBiblioteca" style="swimlane;startSize=20;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-47">
+          <mxGeometry x="180" y="20" width="290" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-81" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-59" source="eEPZKazcpPrEw2ItmqRp-77" target="eEPZKazcpPrEw2ItmqRp-79">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-77" value="Valida los datos modificados" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-59">
+          <mxGeometry x="80" y="316" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-79" value="Actualiza el libro en la BD" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="eEPZKazcpPrEw2ItmqRp-59">
+          <mxGeometry x="80" y="375" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.451;entryY=0.107;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-47" source="eEPZKazcpPrEw2ItmqRp-79" target="eEPZKazcpPrEw2ItmqRp-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eEPZKazcpPrEw2ItmqRp-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="eEPZKazcpPrEw2ItmqRp-47" source="eEPZKazcpPrEw2ItmqRp-76" target="eEPZKazcpPrEw2ItmqRp-77">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
